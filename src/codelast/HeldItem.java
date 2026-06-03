@@ -9,7 +9,7 @@ package codelast;
  * @author Goober
  */
 public class HeldItem {
-    // Attirbutes
+    // Attributes
     private int itemX;
     private int itemY;
     private boolean itemUsed;
