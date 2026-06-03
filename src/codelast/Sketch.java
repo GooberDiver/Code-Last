@@ -22,7 +22,7 @@ public class Sketch extends PApplet {
     
     // Setting screen
     public void settings() {
-        size(600, 600);
+        size(400, 400);
     }
     
     // Setting up objects and text
@@ -30,7 +30,7 @@ public class Sketch extends PApplet {
         background(255); // BG colour set to white
         textSize(20);
         // Instantiating object
-        bamboo = new Human (this, 300, 300, 2, "Bamboo", "images/human.png");
+        bamboo = new Human (this, width/2, height/2, 2, "Bamboo", "images/human.png");
     }
     
     // Drawing stages
@@ -40,8 +40,8 @@ public class Sketch extends PApplet {
         // Start screen
         if (stage == 0) {
             fill(0);
-            text("My Cultural Story", 230, 50);
-            text("Press enter to begin", 220, 100);
+            text("My Cultural Story", 130, 50);
+            text("Press enter to begin", 120, 100);
         } else if (stage == 1) {
             bamboo.draw(); // Drawing Bamboo character
         }
