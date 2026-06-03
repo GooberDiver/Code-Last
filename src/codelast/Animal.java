@@ -8,6 +8,7 @@ package codelast;
  *
  * @author Goober
  */
+
 // Importing
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -19,6 +20,6 @@ public class Animal extends Character {
     // Constructor
     public Animal(PApplet p, int x, int y, int speed, String name, String imagePath) {
         super(p, x, y, speed, name, imagePath); // Calls superclass
-        flying = false;
+        flying = false; //Animal default state is not flying
     }
 }

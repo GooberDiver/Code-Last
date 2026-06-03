@@ -21,6 +21,6 @@ public class Human extends Character {
     // Constructor
     public Human(PApplet p, int x, int y, int speed, String name, String imagePath) {
         super(p, x, y, speed, name, imagePath); // Calls superclass
-        mounted = false;
+        mounted = false; // Default state is not riding an animal
     }
 }
