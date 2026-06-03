@@ -36,6 +36,8 @@ public class Sketch extends PApplet {
     // Drawing stages
     public void draw() {
         background(255); // BG colour set to white
+        
+        // Start screen
         if (stage == 0) {
             fill(0);
             text("My Cultural Story", 310, 50);
