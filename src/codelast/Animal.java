@@ -11,7 +11,6 @@ package codelast;
 
 // Importing
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class Animal extends Character {
     //Attribute

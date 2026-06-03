@@ -12,7 +12,6 @@ package codelast;
 
 // Importing
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class Human extends Character {
    // Attributes
