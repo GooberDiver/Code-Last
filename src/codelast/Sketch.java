@@ -12,7 +12,6 @@ package codelast;
 // Importing
 import processing.core.PApplet;
 
-
 public class Sketch extends PApplet {
     // Object declaration
     private Human bamboo;
