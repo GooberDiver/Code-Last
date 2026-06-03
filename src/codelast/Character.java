@@ -35,8 +35,8 @@ public class Character {
     
     // Behaviour
     public void move (int dx, int dy) {
-        x += dx;
-        y += dy;
+        x += dx * speed;
+        y += dy * speed;
     }
     
     public void draw () {
