@@ -37,8 +37,8 @@ public class Sketch extends PApplet {
         background(255); // BG colour set to white
         if (stage == 0) {
             fill(0);
-            text("My Cultural Story", width/2, 50);
-            text("Press enter to begin", width/2, 100);
+            text("My Cultural Story", 310, 50);
+            text("Press enter to begin", 300, 100);
         } else if (stage == 1) {
             bamboo.draw(); // Drawing Bamboo character
         }
