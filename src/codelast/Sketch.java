@@ -17,6 +17,7 @@ public class Sketch extends PApplet {
     // Object declaration
     private Human bamboo;
     private Human father;
+    // Variable to determine which stage to show
     int stage = 0;
     
     // Setting screen
