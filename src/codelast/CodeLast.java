@@ -15,7 +15,7 @@ public class CodeLast {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Sketch.main("CodeLast.Sketch");
+        Sketch.main("codelast.Sketch"); // Runs code from sketch class
     }
     
 }
