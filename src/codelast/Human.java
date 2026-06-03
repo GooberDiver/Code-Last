@@ -4,21 +4,23 @@
  */
 package codelast;
 
+
 /**
  *
- * @author Goober
+ * @author 343084331
  */
+
 // Importing
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Animal extends Character {
-    //Attribute
-    private boolean flying; // Determines if animal is in flying state
+public class Human extends Character {
+   // Attributes
+    private boolean mounted; // Determine if character is riding an animal
     
     // Constructor
-    public Animal(PApplet p, int x, int y, int speed, String name, String imagePath) {
+    public Human(PApplet p, int x, int y, int speed, String name, String imagePath) {
         super(p, x, y, speed, name, imagePath); // Calls superclass
-        flying = false;
+        mounted = false;
     }
 }
