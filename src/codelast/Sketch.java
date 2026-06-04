@@ -51,19 +51,21 @@ public class Sketch extends PApplet {
         }
         
         // Character movement
+        // WASD was used for movement since most games use WASD
         if (keyPressed) {
-            if (keyCode == DOWN) {
-                bamboo.move(0,1);
-            }
-            else if (keyCode == RIGHT) {
-                bamboo.move(1,0);
-            }
-            else if (keyCode == UP) {
+            if (key == 'w') {
                 bamboo.move(0,-1);
             }
-            else if (keyCode == LEFT) {
+            else if (key == 'a') {
                 bamboo.move(-1,0);
             }
+            else if (key == 's') {
+                bamboo.move(0,1);
+            }
+            else if (key == 'd') {
+                bamboo.move(1,0);
+            }
+
         }
     } // end draw method
     
