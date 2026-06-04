@@ -11,11 +11,13 @@ package codelast;
 
 // Importing
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Sketch extends PApplet {
     // Object declaration
     private Human bamboo;
     private Human father;
+    private PImage bg; // background
     // Variable to determine which stage to show
     int stage = 0;
     
@@ -26,7 +28,7 @@ public class Sketch extends PApplet {
     
     // Setting up objects and text
     public void setup () {
-        background(255); // BG colour set to white
+        bg = loadImage ("images/field.png"); // Setting up BG image
         textSize(20);
         // Instantiating object
         bamboo = new Human (this, width/2, height/2, 2, "Bamboo", "images/human.png");
@@ -34,7 +36,8 @@ public class Sketch extends PApplet {
     
     // Drawing stages
     public void draw() {
-        background(255); // BG colour set to white
+        //Drawing BG
+        image(bg, 0, 0, width, height);
         
         // Start screen
         if (stage == 0) {
@@ -47,16 +50,16 @@ public class Sketch extends PApplet {
         
         // Character movement
         if (keyPressed) {
-            if (keyCode == 'w') {
+            if (keyCode == DOWN) {
                 bamboo.move(0,1);
             }
-            else if (keyCode == 'a') {
+            else if (keyCode == RIGHT) {
                 bamboo.move(1,0);
             }
-            else if (keyCode == 's') {
+            else if (keyCode == UP) {
                 bamboo.move(0,-1);
             }
-            else if (keyCode == 'd') {
+            else if (keyCode == LEFT) {
                 bamboo.move(-1,0);
             }
         }
