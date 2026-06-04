@@ -32,6 +32,7 @@ public class Sketch extends PApplet {
         textSize(20);
         // Instantiating object
         bamboo = new Human (this, width/2, height/2, 2, "Bamboo", "images/human.png");
+        father = new Human (this, 100, 100, 1, "Father", "images/father.png");
     }
     
     // Drawing stages
@@ -45,6 +46,7 @@ public class Sketch extends PApplet {
             text("My Cultural Story", 130, 50);
             text("Press enter to begin", 120, 100);
         } else if (stage == 1) {
+            father.draw();
             bamboo.draw(); // Drawing Bamboo character
             // Changing the BG image for next scene
             bg = loadImage ("images/field.png"); 
