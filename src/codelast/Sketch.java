@@ -65,7 +65,6 @@ public class Sketch extends PApplet {
             else if (key == 'd') {
                 bamboo.move(1,0);
             }
-
         }
     } // end draw method
     
