@@ -17,6 +17,9 @@ public class Sketch extends PApplet {
     // Object declaration
     private Human bamboo;
     private Human father;
+    private Animal turtle;
+    private Animal dragon;
+    private Animal phoenix;
     private PImage bg; // background
     // Variable to determine which stage to show
     int stage = 0;
@@ -33,6 +36,9 @@ public class Sketch extends PApplet {
         // Instantiating object
         bamboo = new Human (this, width/2, height/2, 2, "Bamboo", "images/human.png");
         father = new Human (this, 100, 100, 1, "Father", "images/father.png");
+        turtle = new Animal (this, 300, 300, 1, "Turtle", "images/turtle.png");
+        dragon = new Animal (this, 100, 200, 5, "Dragon", "images/dragon.png");
+        phoenix = new Animal (this, 100, 300, 3, "Phoenix", "images/phoenix.png");
     }
     
     // Drawing stages
@@ -47,6 +53,9 @@ public class Sketch extends PApplet {
             text("Press enter to begin", 120, 100);
         } else if (stage == 1) {
             father.draw();
+            turtle.draw();
+            dragon.draw();
+            phoenix.draw();
             bamboo.draw(); // Drawing Bamboo character
             // Changing the BG image for next scene
             bg = loadImage ("images/field.png"); 
