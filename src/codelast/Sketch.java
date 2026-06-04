@@ -44,6 +44,22 @@ public class Sketch extends PApplet {
         } else if (stage == 1) {
             bamboo.draw(); // Drawing Bamboo character
         }
+        
+        // Character movement
+        if (keyPressed) {
+            if (keyCode == 'w') {
+                bamboo.move(0,1);
+            }
+            else if (keyCode == 'a') {
+                bamboo.move(1,0);
+            }
+            else if (keyCode == 's') {
+                bamboo.move(0,-1);
+            }
+            else if (keyCode == 'd') {
+                bamboo.move(-1,0);
+            }
+        }
     } // end draw method
     
     // Method for different results when using keyboard
