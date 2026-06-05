@@ -100,8 +100,7 @@ public class Sketch extends PApplet {
             this.text("Press enter to mount", turtle.x, turtle.y);
             if (keyPressed) {
                 if (keyCode == ENTER) {
-                    turtle.x = bamboo.x;
-                    turtle.y = bamboo.y + 20;
+                   bamboo.mounted = false
                 }
             }
         }
