@@ -77,6 +77,11 @@ public class Sketch extends PApplet {
                 bamboo.move(1,0);
             }
         }
+        
+        // Check if main character is colliding
+        if (bamboo.isCollidingWith(father)) {
+            this.text("characters colliding", bamboo.x, bamboo.y);
+        }
     } // end draw method
     
     // Method for different results when using keyboard

@@ -15,8 +15,8 @@ import processing.core.PImage;
 
 public class Character {
     // Attributes
-    private int x;
-    private int y;
+    public int x;
+    public int y;
     private int speed;
     private String name;
     private PApplet app;
@@ -44,7 +44,7 @@ public class Character {
     }
     
     // Rectangle collision detection
-    public boolean isCollidingWIth (Character c2) {
+    public boolean isCollidingWith (Character c2) {
         // Collision checks
         boolean leftOfC2Right = x < c2.x + c2.image.width;
         boolean rightOfC2Left = x + image.width > c2.x;
