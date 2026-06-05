@@ -83,6 +83,16 @@ public class Sketch extends PApplet {
             fill (255); // Set text colour to white
             this.text("Colliding", bamboo.x, bamboo.y + 30);
         }
+        
+        if (bamboo.isCollidingWith(dragon)) {
+             fill (255); // Set text colour to white
+            this.text("Like a what??", bamboo.x, bamboo.y + 30);
+        }
+        
+        if (bamboo.isCollidingWith(phoenix)) {
+             fill (255); // Set text colour to white
+            this.text("Bird bird?", bamboo.x, bamboo.y + 30);
+        }
     } // end draw method
     
     // Method for different results when using keyboard
