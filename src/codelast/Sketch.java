@@ -90,9 +90,22 @@ public class Sketch extends PApplet {
         }
         
         if (bamboo.isCollidingWith(phoenix)) {
-             fill (255); // Set text colour to white
+            fill (255); // Set text colour to white
             this.text("Big bird?", bamboo.x, bamboo.y + 30);
         }
+        /**
+        // Mounting the turtle
+        if (bamboo.isCollidingWith(turtle)) {
+            fill(255);
+            this.text("Press enter to mount", turtle.x, turtle.y);
+            if (keyPressed) {
+                if (keyCode == ENTER) {
+                    turtle.x = bamboo.x;
+                    turtle.y = bamboo.y + 20;
+                }
+            }
+        }
+        */
     } // end draw method
     
     // Method for different results when using keyboard
