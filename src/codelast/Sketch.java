@@ -91,7 +91,7 @@ public class Sketch extends PApplet {
         
         if (bamboo.isCollidingWith(phoenix)) {
              fill (255); // Set text colour to white
-            this.text("Bird bird?", bamboo.x, bamboo.y + 30);
+            this.text("Big bird?", bamboo.x, bamboo.y + 30);
         }
     } // end draw method
     
