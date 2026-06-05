@@ -42,4 +42,17 @@ public class Character {
     public void draw () {
         app.image(image, x, y);
     }
+    
+    // Rectangle collision detection
+    public boolean isCollidingWIth (Character c2) {
+        // Collision checks
+        boolean leftOfC2Right = x < c2.x + c2.image.width;
+        boolean rightOfC2Left = x + image.width > c2.x;
+        boolean aboveC2Bottom = x < c2.y + c2.image.height;
+        boolean belowC2Top = y + image.height > c2.y;
+        
+        // Returning values
+        return leftOfC2Right && rightOfC2Left
+                && aboveC2Bottom && belowC2Top;
+    }
 }
