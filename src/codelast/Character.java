@@ -48,7 +48,7 @@ public class Character {
         // Collision checks
         boolean leftOfC2Right = x < c2.x + c2.image.width;
         boolean rightOfC2Left = x + image.width > c2.x;
-        boolean aboveC2Bottom = x < c2.y + c2.image.height;
+        boolean aboveC2Bottom = y < c2.y + c2.image.height;
         boolean belowC2Top = y + image.height > c2.y;
         
         // Returning values
