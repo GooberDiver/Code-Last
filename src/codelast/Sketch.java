@@ -38,7 +38,7 @@ public class Sketch extends PApplet {
         father = new Human (this, 100, 100, 1, "Father", "images/father.png");
         turtle = new Animal (this, 300, 300, 1, "Turtle", "images/turtle.png");
         dragon = new Animal (this, 100, 200, 5, "Dragon", "images/dragon.png");
-        phoenix = new Animal (this, 100, 300, 3, "Phoenix", "images/phoenix.png");
+        phoenix = new Animal (this, 100, 350, 3, "Phoenix", "images/phoenix.png");
     }
     
     // Drawing stages
@@ -80,7 +80,8 @@ public class Sketch extends PApplet {
         
         // Check if main character is colliding
         if (bamboo.isCollidingWith(father)) {
-            this.text("characters colliding", bamboo.x, bamboo.y);
+            fill (255); // Set text colour to white
+            this.text("Colliding", bamboo.x, bamboo.y + 30);
         }
     } // end draw method
     
