@@ -15,7 +15,7 @@ import processing.core.PImage;
 
 public class Character {
     // Attributes
-    public int x;
+    public int x; // X and Y were set to public in order to use collision
     public int y;
     private int speed;
     private String name;
