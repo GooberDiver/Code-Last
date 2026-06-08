@@ -93,8 +93,8 @@ public class Sketch extends PApplet {
             this.text("Big bird?", bamboo.x, bamboo.y + 30);
         }
         if (bamboo.isCollidingWith(turtle)) {
-            dialog = loadImage("images/dialog1.png"); // Setting dialogue img
-            image(dialog, 0, 300); // Showing dialogue
+            dialog = loadImage("images/dialog1.PNG"); // Setting dialogue img
+            image(dialog, 70, 300); // Showing dialogue
         }
 
     } // end draw method
