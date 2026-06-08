@@ -92,7 +92,6 @@ public class Sketch extends PApplet {
             dialog = loadImage("images/dialog3.png"); // Set img
             image(dialog, 40, 300); // Show dialogue
         }
-       
         if (bamboo.isCollidingWith(phoenix)) {
             dialog = loadImage("images/dialog4.png"); // Set img
             image(dialog, 40, 300); // Show dialogue
