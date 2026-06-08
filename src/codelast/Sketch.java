@@ -37,9 +37,9 @@ public class Sketch extends PApplet {
         // Instantiating object
         bamboo = new Human (this, width/2, height/2, 2, "Bamboo", "images/human.png");
         father = new Human (this, 100, 100, 1, "Father", "images/father.png");
-        turtle = new Animal (this, 300, 300, 1, "Turtle", "images/turtle.png");
+        turtle = new Animal (this, 300, 100, 1, "Turtle", "images/turtle.png");
         dragon = new Animal (this, 100, 200, 5, "Dragon", "images/dragon.png");
-        phoenix = new Animal (this, 100, 350, 3, "Phoenix", "images/phoenix.png");
+        phoenix = new Animal (this, 300, 250, 3, "Phoenix", "images/phoenix.png");
     }
     
     // Drawing stages
