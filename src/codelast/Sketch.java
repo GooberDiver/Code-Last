@@ -80,23 +80,23 @@ public class Sketch extends PApplet {
         }
         
         // Check if main character is colliding
-        if (bamboo.isCollidingWith(father)) {
-            dialog = loadImage("images/dialog3.png"); // Set img
-            image(dialog, 40, 300); // Show dialogue
-        }
-        if (bamboo.isCollidingWith(dragon)) {
-            dialog = loadImage("images/dialog2.png"); // Set image
-            image(dialog, 40, 300); // Show dialogue
-        }       
-        if (bamboo.isCollidingWith(phoenix)) {
-            dialog = loadImage("images/dialog4.png"); // Set img
-            image(dialog, 40, 300); // Show dialogue
-        }
         if (bamboo.isCollidingWith(turtle)) {
             dialog = loadImage("images/dialog1.PNG"); // Setting dialogue img
             image(dialog, 70, 300); // Showing dialogue
         }
-
+         if (bamboo.isCollidingWith(dragon)) {
+            dialog = loadImage("images/dialog2.png"); // Set image
+            image(dialog, 40, 300); // Show dialogue
+        }       
+        if (bamboo.isCollidingWith(father)) {
+            dialog = loadImage("images/dialog3.png"); // Set img
+            image(dialog, 40, 300); // Show dialogue
+        }
+       
+        if (bamboo.isCollidingWith(phoenix)) {
+            dialog = loadImage("images/dialog4.png"); // Set img
+            image(dialog, 40, 300); // Show dialogue
+        }   
     } // end draw method
     
     // Method for different results when using keyboard
