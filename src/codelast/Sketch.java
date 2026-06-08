@@ -95,6 +95,7 @@ public class Sketch extends PApplet {
         if (bamboo.isCollidingWith(phoenix)) {
             dialog = loadImage("images/dialog4.png"); // Set img
             image(dialog, 40, 300); // Show dialogue
+            
         }   
     } // end draw method
     
@@ -121,3 +122,11 @@ public class Sketch extends PApplet {
             }
         }
         */
+/*
+    if (keyPressed) {
+        if (keyCode == ENTER) {
+            dialog = loadImage("images/dialog3.png");
+                   
+            }
+        }
+    */
