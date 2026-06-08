@@ -114,8 +114,7 @@ public class Sketch extends PApplet {
         }
         if (bamboo.isCollidingWith(phoenix)) {
             dialog = loadImage("images/dialog4.png"); // Set img
-            image(dialog, 40, 300); // Show dialogue
-            
+            image(dialog, 40, 300); // Show dialogue   
         }   
     } // end draw method
     
@@ -130,18 +129,6 @@ public class Sketch extends PApplet {
     } // End of key pressed
 } // End of class
 
-        /**
-        // Mounting the turtle
-        if (bamboo.isCollidingWith(turtle)) {
-            fill(255);
-            this.text("Press enter to mount", turtle.x, turtle.y);
-            if (keyPressed) {
-                if (keyCode == ENTER) {
-                   bamboo.mounted = false
-                }
-            }
-        }
-        */
 /*
     if (keyPressed) {
         if (keyCode == ENTER) {
