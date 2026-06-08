@@ -81,16 +81,16 @@ public class Sketch extends PApplet {
         
         // Check if main character is colliding
         if (bamboo.isCollidingWith(father)) {
-            fill (255); // Set text colour to white
-            this.text("Colliding", bamboo.x, bamboo.y + 30);
+            dialog = loadImage("images/dialog3.png"); // Set img
+            image(dialog, 40, 300); // Show dialogue
         }
         if (bamboo.isCollidingWith(dragon)) {
-             fill (255); // Set text colour to white
-            this.text("Like a what??", bamboo.x, bamboo.y + 30);
+            dialog = loadImage("images/dialog2.png"); // Set image
+            image(dialog, 40, 300); // Show dialogue
         }       
         if (bamboo.isCollidingWith(phoenix)) {
-            fill (255); // Set text colour to white
-            this.text("Big bird?", bamboo.x, bamboo.y + 30);
+            dialog = loadImage("images/dialog4.png"); // Set img
+            image(dialog, 40, 300); // Show dialogue
         }
         if (bamboo.isCollidingWith(turtle)) {
             dialog = loadImage("images/dialog1.PNG"); // Setting dialogue img
