@@ -65,6 +65,11 @@ public class Sketch extends PApplet {
         // Character movement
         // WASD was used for movement since most games use WASD
         if (keyPressed) {
+            // Check if mounted state is true
+            if (bamboo.mounted == true) { 
+                turtle.x = bamboo.x - 20; // Set new position of turtle
+                turtle.y = bamboo.y; // Turtle moves with bamboo while true
+            }
             if (key == 'w') {
                 bamboo.move(0,-1);
             }
@@ -81,9 +86,24 @@ public class Sketch extends PApplet {
         
         // Check if main character is colliding
         if (bamboo.isCollidingWith(turtle)) {
-            dialog = loadImage("images/dialog1.PNG"); // Setting dialogue img
-            image(dialog, 70, 300); // Showing dialogue
-        }
+            // Setting dialogue img with check to see if character is moutned
+            if (bamboo.mounted == true) {
+                dialog = loadImage("images/mountText.png");
+            } else {
+                dialog = loadImage("images/dialog1.PNG"); 
+            }
+            image(dialog, 40, 300); // Showing dialogue
+            
+            // Code for mounting
+            if (keyCode == ENTER) {
+                bamboo.mounted = true;
+            }
+            if (keyCode == BACKSPACE) {
+                bamboo.mounted = false;
+                turtle.x = 300;
+                turtle.y = 100;
+            }
+        } // End of turtle's collision code
          if (bamboo.isCollidingWith(dragon)) {
             dialog = loadImage("images/dialog2.png"); // Set image
             image(dialog, 40, 300); // Show dialogue

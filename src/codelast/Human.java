@@ -15,7 +15,7 @@ import processing.core.PApplet;
 
 public class Human extends Character {
    // Attributes
-    private boolean mounted; // Determine if character is riding an animal
+    public boolean mounted; // Determine if character is riding an animal
     
     // Constructor
     public Human(PApplet p, int x, int y, int speed, String name, String imagePath) {
