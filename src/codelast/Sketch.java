@@ -21,6 +21,7 @@ public class Sketch extends PApplet {
     private Animal dragon;
     private Animal phoenix;
     private PImage bg; // background
+    private PImage dialog; // dialogue
     // Variable to determine which stage to show
     int stage = 0;
     
@@ -83,28 +84,19 @@ public class Sketch extends PApplet {
             fill (255); // Set text colour to white
             this.text("Colliding", bamboo.x, bamboo.y + 30);
         }
-        
         if (bamboo.isCollidingWith(dragon)) {
              fill (255); // Set text colour to white
             this.text("Like a what??", bamboo.x, bamboo.y + 30);
-        }
-        
+        }       
         if (bamboo.isCollidingWith(phoenix)) {
             fill (255); // Set text colour to white
             this.text("Big bird?", bamboo.x, bamboo.y + 30);
         }
-        /**
-        // Mounting the turtle
         if (bamboo.isCollidingWith(turtle)) {
-            fill(255);
-            this.text("Press enter to mount", turtle.x, turtle.y);
-            if (keyPressed) {
-                if (keyCode == ENTER) {
-                   bamboo.mounted = false
-                }
-            }
+            dialog = loadImage("images/dialog1.png"); // Setting dialogue img
+            image(dialog, 0, 300); // Showing dialogue
         }
-        */
+
     } // end draw method
     
     // Method for different results when using keyboard
@@ -117,3 +109,16 @@ public class Sketch extends PApplet {
         } // End of stage 0 if-statement
     } // End of key pressed
 } // End of class
+
+        /**
+        // Mounting the turtle
+        if (bamboo.isCollidingWith(turtle)) {
+            fill(255);
+            this.text("Press enter to mount", turtle.x, turtle.y);
+            if (keyPressed) {
+                if (keyCode == ENTER) {
+                   bamboo.mounted = false
+                }
+            }
+        }
+        */
