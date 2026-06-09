@@ -63,13 +63,13 @@ public class Sketch extends PApplet {
         }
         
         // Character movement
-        // WASD was used for movement since most games use WASD
         if (keyPressed) {
             // Check if mounted state is true
             if (bamboo.mounted == true) { 
                 turtle.x = bamboo.x - 20; // Set new position of turtle
                 turtle.y = bamboo.y; // Turtle moves with bamboo while true
             }
+            // WASD was used for movement since most games use WASD
             if (key == 'w') {
                 bamboo.move(0,-1);
             }
@@ -81,7 +81,7 @@ public class Sketch extends PApplet {
             }
             else if (key == 'd') {
                 bamboo.move(1,0);
-            }
+            }    
         }
         
         // Check if main character is colliding
