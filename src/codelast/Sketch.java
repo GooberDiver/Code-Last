@@ -126,7 +126,29 @@ public class Sketch extends PApplet {
                 stage = 1; // Changing to stage 1
             }
         } // End of stage 0 if-statement
+        
+        // Stage 1 mount check
+        if (stage == 1 && bamboo.isCollidingWith(turtle)) {
+            // mount check
+            if (key == 'c') {
+                mountCheck(turtle);
+            }
+        } // End of stage 1
     } // End of key pressed
+    
+    public void mountCheck (Character c) {
+        if (c instanceof Human) {
+            System.out.println("Cannot mount another person");
+        }
+        if (c instanceof Animal) {
+            if (c == turtle) {
+                System.out.println("Animal can be mounted");
+            }
+            else {
+                System.out.println("Animal cannot be mounted");
+            }
+        }
+    }
 } // End of class
 
 /*
