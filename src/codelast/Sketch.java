@@ -133,6 +133,10 @@ public class Sketch extends PApplet {
             if (key == 'c') {
                 mountCheck(turtle);
             }
+            // Check character info
+            if (key == 'q') {
+                charInfoCheck(turtle);
+            }
         } // End of stage 1
     } // End of key pressed
     
@@ -148,6 +152,10 @@ public class Sketch extends PApplet {
                 System.out.println("Animal cannot be mounted");
             }
         }
+    }
+    
+    public void charInfoCheck (Character c) {
+        System.out.println(c); // uses the toString method of character
     }
 } // End of class
 

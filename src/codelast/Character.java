@@ -55,4 +55,8 @@ public class Character {
         return leftOfC2Right && rightOfC2Left
                 && aboveC2Bottom && belowC2Top;
     }
+    
+    public String toString() {
+        return "Name: " + name + " | Speed: " + speed;
+    }
 }
