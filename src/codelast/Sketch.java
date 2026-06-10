@@ -69,6 +69,11 @@ public class Sketch extends PApplet {
         }
         // Character movement
         if (keyPressed) {
+            if (stage == 0 || stage == 10000) {
+                bamboo.speed = 0;
+            } else {
+                    bamboo.speed = 2;
+                }
             // Check if mounted state is true
             if (bamboo.mounted == true) { 
                 turtle.x = bamboo.x - 20; // Set new position of turtle
