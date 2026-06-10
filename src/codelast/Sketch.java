@@ -24,6 +24,7 @@ public class Sketch extends PApplet {
     private PImage dialog; // dialogue
     // Variable to determine which stage to show
     int stage = 0;
+    static int heldStage = 0; // Variable used to keep track of previous stage
     
     // Setting screen
     public void settings() {
@@ -61,7 +62,11 @@ public class Sketch extends PApplet {
             // Changing the BG image for next scene
             bg = loadImage ("images/field.png"); 
         }
-        
+        if (stage == 10000) { // pause menu
+           background(255);
+           text("Game is currently paused", 20, 50);
+           text("Press Z to unpause", 20, 100);
+        }
         // Character movement
         if (keyPressed) {
             // Check if mounted state is true
@@ -126,6 +131,17 @@ public class Sketch extends PApplet {
                 stage = 1; // Changing to stage 1
             }
         } // End of stage 0 if-statement
+        
+        // Code for pause menu
+        if (stage != 0) {
+            if (keyCode == TAB) {
+                heldStage = stage;
+                stage = 10000; // Stage is set high so pause menu won't trigger normally
+            }
+            if (key == 'z') {
+                stage = heldStage;
+            }
+        }
         
         // Stage 1 mount check
         if (stage == 1 && bamboo.isCollidingWith(turtle)) {
