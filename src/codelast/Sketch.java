@@ -20,6 +20,7 @@ public class Sketch extends PApplet {
     private Animal turtle;
     private Animal dragon;
     private Animal phoenix;
+    private PImage door; // door 
     private PImage bg; // background
     private PImage dialog; // dialogue
     // Variable to determine which stage to show
@@ -34,6 +35,7 @@ public class Sketch extends PApplet {
     // Setting up objects and text
     public void setup () {
         bg = loadImage ("images/noon.png"); // Setting up BG image
+        door = loadImage("images/door.png");
         textSize(20);
         // Instantiating object
         bamboo = new Human (this, width/2, height/2, 2, "Bamboo", "images/human.png");
@@ -54,6 +56,7 @@ public class Sketch extends PApplet {
             text("My Cultural Story", 130, 50);
             text("Press enter to begin", 120, 100);
         } else if (stage == 1) {
+            image(door, width/2, 25);
             father.draw();
             turtle.draw();
             dragon.draw();
@@ -61,6 +64,10 @@ public class Sketch extends PApplet {
             bamboo.draw(); // Drawing Bamboo character
             // Changing the BG image for next scene
             bg = loadImage ("images/field.png"); 
+        } else if (stage == 2) {
+            background(50);
+            bamboo.draw();
+            turtle.draw();
         }
         if (stage == 10000) { // pause menu
            background(255);
@@ -69,9 +76,10 @@ public class Sketch extends PApplet {
         }
         // Character movement
         if (keyPressed) {
+            // Stop player from moving during start and pause
             if (stage == 0 || stage == 10000) {
                 bamboo.speed = 0;
-            } else {
+            } else { // Set speed to normal when not paused
                     bamboo.speed = 2;
                 }
             // Check if mounted state is true
@@ -125,7 +133,11 @@ public class Sketch extends PApplet {
         if (bamboo.isCollidingWith(phoenix)) {
             dialog = loadImage("images/dialog4.png"); // Set img
             image(dialog, 40, 300); // Show dialogue   
-        }   
+        } 
+        
+        if (bamboo.x == width/2 && bamboo.y <= 25) {
+            stage = 2;
+        }
     } // end draw method
     
     // Method for different results when using keyboard
