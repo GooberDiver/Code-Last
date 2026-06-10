@@ -134,14 +134,13 @@ public class Sketch extends PApplet {
         
         // Code for pause menu
         if (stage != 0) {
-            if (keyCode == TAB) {
+            if (keyCode == TAB) { // Starts pause
                 heldStage = stage;
                 stage = 10000; // Stage is set high so pause menu won't trigger normally
-            }
-            if (key == 'z') {
+            }  if (key == 'z') { // Ends pause
                 stage = heldStage;
-            }
-        }
+                }
+        } // end of pause code
         
         // Stage 1 mount check
         if (stage == 1 && bamboo.isCollidingWith(turtle)) {
