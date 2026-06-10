@@ -34,7 +34,7 @@ public class HeldItem {
         app.image(image, itemX, itemY);
     }
     
-    // Rectangle collision detection
+    // Rectangle collision detection for items
     public boolean isCollidingWith (HeldItem d2) {
         // Collision checks
         boolean leftOfC2Right = itemX < d2.itemX + d2.image.width;

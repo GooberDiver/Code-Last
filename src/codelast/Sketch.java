@@ -27,6 +27,7 @@ public class Sketch extends PApplet {
     // Variable to determine which stage to show
     int stage = 0;
     static int heldStage = 0; // Variable used to keep track of previous stage
+    boolean pickup = false;
     
     // Setting screen
     public void settings() {
@@ -83,8 +84,13 @@ public class Sketch extends PApplet {
             if (stage == 0 || stage == 10000) {
                 bamboo.speed = 0;
             } else { // Set speed to normal when not paused
-                    bamboo.speed = 2;
-                }
+                bamboo.speed = 2;
+            }
+            
+            if (pickup == true) {
+                itemKey.itemX = bamboo.x;
+                itemKey.itemY = bamboo.y;
+            }
             // Check if mounted state is true
             if (bamboo.mounted == true) { 
                 turtle.x = bamboo.x - 20; // Set new position of turtle
@@ -138,8 +144,8 @@ public class Sketch extends PApplet {
             image(dialog, 40, 300); // Show dialogue   
         } 
         
-        if (bamboo.x == width/2 && bamboo.y <= 25) {
-            stage = 2;
+        if (bamboo.x == itemKey.itemX && bamboo.y == itemKey.itemY) {
+            pickup = true;
         }
     } // end draw method
     
