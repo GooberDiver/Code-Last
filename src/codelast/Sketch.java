@@ -20,7 +20,8 @@ public class Sketch extends PApplet {
     private Animal turtle;
     private Animal dragon;
     private Animal phoenix;
-    private PImage door; // door 
+    private HeldItem door; // door isn't held but it is used for item checks
+    private HeldItem itemKey; // key
     private PImage bg; // background
     private PImage dialog; // dialogue
     // Variable to determine which stage to show
@@ -35,7 +36,6 @@ public class Sketch extends PApplet {
     // Setting up objects and text
     public void setup () {
         bg = loadImage ("images/noon.png"); // Setting up BG image
-        door = loadImage("images/door.png");
         textSize(20);
         // Instantiating object
         bamboo = new Human (this, width/2, height/2, 2, "Bamboo", "images/human.png");
@@ -43,6 +43,8 @@ public class Sketch extends PApplet {
         turtle = new Animal (this, 300, 100, 1, "Turtle", "images/turtle.png");
         dragon = new Animal (this, 100, 200, 5, "Dragon", "images/dragon.png");
         phoenix = new Animal (this, 300, 250, 3, "Phoenix", "images/phoenix.png");
+        door = new HeldItem (this, width/2, 25, "images/door.png");
+        itemKey = new HeldItem(this, 25, 25, "images/DaveKey.png");
     }
     
     // Drawing stages
@@ -56,7 +58,8 @@ public class Sketch extends PApplet {
             text("My Cultural Story", 130, 50);
             text("Press enter to begin", 120, 100);
         } else if (stage == 1) {
-            image(door, width/2, 25);
+            door.draw();
+            itemKey.draw();
             father.draw();
             turtle.draw();
             dragon.draw();
