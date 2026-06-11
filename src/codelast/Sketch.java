@@ -173,9 +173,9 @@ public class Sketch extends PApplet {
                 pickup = false;
                 itemKey.x = itemKey.y = 25;
                 itemKey.item.itemUsed = true; // Set item use to true
-            } 
-            
-        }
+            }  
+        } // End of stage 1 code
+        
         // Return to stage 1 and change door position
         if (stage == 2 && bamboo.isCollidingWith(door)) {
             stage = 1;
