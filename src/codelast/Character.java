@@ -33,6 +33,15 @@ public class Character {
         image = app.loadImage(imagePath);
     }
     
+    //Alternate constructor for objects
+    public Character (PApplet p, int x, int y, String imagePath) { 
+        app = p;
+        this.x = x;
+        this.y = y;
+        image = app.loadImage(imagePath);
+        item = new HeldItem(app, x,y, imagePath);
+    }
+    
     // Behaviour
     public void move (int dx, int dy) {
         x += dx * speed;

@@ -144,8 +144,12 @@ public class Sketch extends PApplet {
             image(dialog, 40, 300); // Show dialogue   
         } 
         
-        if (bamboo.x == itemKey.itemX && bamboo.y == itemKey.itemY) {
-            pickup = true;
+        if (bamboo.isCollidingWith(itemKey)){
+            
+        }
+       
+        if (itemKey.isCollidingWith(door)) {
+            stage = 2;
         }
     } // end draw method
     
