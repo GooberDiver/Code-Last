@@ -20,8 +20,10 @@ public class Sketch extends PApplet {
     private Animal turtle;
     private Animal dragon;
     private Animal phoenix;
-    private HeldItem door; // door isn't held but it is used for item checks
-    private HeldItem itemKey; // key
+    // Objects set as character but will use the HeldItem constructor version
+    private Character door; // door isn't held but it is used for item checks
+    private Character itemKey; // key
+    
     private PImage bg; // background
     private PImage dialog; // dialogue
     // Variable to determine which stage to show
@@ -44,8 +46,9 @@ public class Sketch extends PApplet {
         turtle = new Animal (this, 300, 100, 1, "Turtle", "images/turtle.png");
         dragon = new Animal (this, 100, 200, 5, "Dragon", "images/dragon.png");
         phoenix = new Animal (this, 300, 250, 3, "Phoenix", "images/phoenix.png");
-        door = new HeldItem (this, width/2, 25, "images/door.png");
-        itemKey = new HeldItem(this, 25, 25, "images/DaveKey.png");
+        // Objects use the alternate character constructor
+        door = new Character (this, width/2, 25, "images/door.png");
+        itemKey = new Character(this, 25, 25, "images/DaveKey.png");
     }
     
     // Drawing stages
@@ -88,8 +91,8 @@ public class Sketch extends PApplet {
             }
             
             if (pickup == true) {
-                itemKey.itemX = bamboo.x;
-                itemKey.itemY = bamboo.y;
+                itemKey.x = bamboo.x;
+                itemKey.y = bamboo.y;
             }
             // Check if mounted state is true
             if (bamboo.mounted == true) { 
@@ -145,7 +148,7 @@ public class Sketch extends PApplet {
         } 
         
         if (bamboo.isCollidingWith(itemKey)){
-            
+            pickup = true;
         }
        
         if (itemKey.isCollidingWith(door)) {
