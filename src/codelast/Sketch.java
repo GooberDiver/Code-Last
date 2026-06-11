@@ -66,7 +66,7 @@ public class Sketch extends PApplet {
             fill(0);
             text("My Cultural Story", 130, 50);
             text("Press enter to begin", 120, 100);
-        } else if (stage == 1) {
+        } if (stage == 1) {
             // Draw objects
             door.draw();
             itemKey.draw();
@@ -176,8 +176,11 @@ public class Sketch extends PApplet {
             } 
             
         }
+        // Return to stage 1 and change door position
         if (stage == 2 && bamboo.isCollidingWith(door)) {
             stage = 1;
+            door.x = width/2;
+            door.y = 25;
             itemKey.item.itemUsed = false;
         }
     } // end draw method
