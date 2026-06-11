@@ -43,7 +43,7 @@ public class Sketch extends PApplet {
         // Instantiating object
         bamboo = new Human (this, width/2, height/2, 2, "Bamboo", "images/human.png");
         father = new Human (this, 100, 100, 1, "Father", "images/father.png");
-        turtle = new Animal (this, 300, 100, 1, "Turtle", "images/turtle.png");
+        turtle = new Animal (this, 300, 100, 4, "Turtle", "images/turtle.png");
         dragon = new Animal (this, 100, 200, 5, "Dragon", "images/dragon.png");
         phoenix = new Animal (this, 300, 250, 3, "Phoenix", "images/phoenix.png");
         // Objects use the alternate character constructor
@@ -96,6 +96,7 @@ public class Sketch extends PApplet {
             }
             // Check if mounted state is true
             if (bamboo.mounted == true) { 
+                bamboo.speed = turtle.speed; // Changes movespeed while mounted
                 turtle.x = bamboo.x - 20; // Set new position of turtle
                 turtle.y = bamboo.y; // Turtle moves with bamboo while true
             }
@@ -113,47 +114,52 @@ public class Sketch extends PApplet {
                 bamboo.move(1,0);
             }    
         }
-        
-        // Check if main character is colliding
+        // Turtle collision check
         if (bamboo.isCollidingWith(turtle)) {
-            // Setting dialogue img with check to see if character is moutned
-            if (bamboo.mounted == true) {
-                dialog = loadImage("images/mountText.png");
-            } else {
-                dialog = loadImage("images/dialog1.PNG"); 
-            }
-            image(dialog, 40, 300); // Showing dialogue
-            
-            // Code for mounting
-            if (keyCode == ENTER) {
-                bamboo.mounted = true;
-            }
-            if (keyCode == BACKSPACE) {
-                bamboo.mounted = false;
-                turtle.x = 300;
-                turtle.y = 100;
-            }
-        } // End of turtle's collision code
-         if (bamboo.isCollidingWith(dragon)) {
-            dialog = loadImage("images/dialog2.png"); // Set image
-            image(dialog, 40, 300); // Show dialogue
-        }       
-        if (bamboo.isCollidingWith(father)) {
-            dialog = loadImage("images/dialog3.png"); // Set img
-            image(dialog, 40, 300); // Show dialogue
-        }
-        if (bamboo.isCollidingWith(phoenix)) {
-            dialog = loadImage("images/dialog4.png"); // Set img
-            image(dialog, 40, 300); // Show dialogue   
-        } 
+                // Setting dialogue img with check to see if character is moutned
+                if (bamboo.mounted == true) {
+                    dialog = loadImage("images/mountText.png");
+                } else {
+                    dialog = loadImage("images/dialog1.PNG"); 
+                }
+                image(dialog, 40, 300); // Showing dialogue
+
+                // Code for mounting
+                if (keyCode == ENTER) {
+                    bamboo.mounted = true;
+                }
+                if (keyCode == BACKSPACE) {
+                    bamboo.mounted = false;
+                    turtle.x = 300;
+                    turtle.y = 100;
+                }
+            } // End of turtle's collision code
         
-        if (bamboo.isCollidingWith(itemKey)){
-            pickup = true;
+        if (stage == 1) {
+            // Check if main character is colliding
+            if (bamboo.isCollidingWith(dragon)) {
+                dialog = loadImage("images/dialog2.png"); // Set image
+                image(dialog, 40, 300); // Show dialogue
+            }       
+            if (bamboo.isCollidingWith(father)) {
+                dialog = loadImage("images/dialog3.png"); // Set img
+                image(dialog, 40, 300); // Show dialogue
+            }
+            if (bamboo.isCollidingWith(phoenix)) {
+                dialog = loadImage("images/dialog4.png"); // Set img
+                image(dialog, 40, 300); // Show dialogue   
+            } 
+            // Pick up key
+            if (bamboo.isCollidingWith(itemKey)){
+                pickup = true;
+            }
+            // Change stages by touching door with key
+            if (itemKey.isCollidingWith(door)) {
+                stage = 2;
+                pickup = false;
+            } 
         }
        
-        if (itemKey.isCollidingWith(door)) {
-            stage = 2;
-        }
     } // end draw method
     
     // Method for different results when using keyboard
@@ -176,7 +182,7 @@ public class Sketch extends PApplet {
         } // end of pause code
         
         // Stage 1 mount check
-        if (stage == 1 && bamboo.isCollidingWith(turtle)) {
+        if (stage != 0 && bamboo.isCollidingWith(turtle)) {
             // mount check
             if (key == 'c') {
                 mountCheck(turtle);
@@ -206,12 +212,3 @@ public class Sketch extends PApplet {
         System.out.println(c); // uses the toString method of character
     }
 } // End of class
-
-/*
-    if (keyPressed) {
-        if (keyCode == ENTER) {
-            dialog = loadImage("images/dialog3.png");
-                   
-            }
-        }
-    */
