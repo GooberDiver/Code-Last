@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.File;
+import java.util.Scanner;
 
 public class Sketch extends PApplet {
     // Object declaration
@@ -34,9 +35,6 @@ public class Sketch extends PApplet {
     int stage = 0;
     static int heldStage = 0; // Variable used to keep track of previous stage
     boolean pickup = false;
-    
-    // load stage from file
-    
     
     // Setting screen
     public void settings() {
@@ -79,6 +77,8 @@ public class Sketch extends PApplet {
             bamboo.draw(); // Drawing Bamboo character
             // Changing the BG image for next scene
             bg = loadImage ("images/field.png"); 
+            // Save progress
+            progressSave();
         } if (stage == 2) {
             background(50);
             bamboo.draw();
@@ -171,10 +171,14 @@ public class Sketch extends PApplet {
             if (itemKey.isCollidingWith(door)) {
                 stage = 2;
                 pickup = false;
+                itemKey.x = itemKey.y = 25;
+                itemKey.item.itemUsed = true; // Set item use to true
             } 
+            
         }
         if (stage == 2 && bamboo.isCollidingWith(door)) {
             stage = 1;
+            itemKey.item.itemUsed = false;
         }
     } // end draw method
     
@@ -183,7 +187,8 @@ public class Sketch extends PApplet {
         // Starting screen
         if (stage == 0) {
             if (keyCode == ENTER) { // User hits enter
-                stage = 1; // Changing to stage 1
+                progressLoad();
+                stage = heldStage;
             }
         } // End of stage 0 if-statement
         
@@ -223,6 +228,23 @@ public class Sketch extends PApplet {
         } catch ( IOException ioException ) {
            System.out.println("Error with saving stage"); 
         } 
+    }
+    
+    /**
+     * Loads user progress
+     */
+    public void progressLoad() {
+       try{
+           // Makes scanner
+           Scanner fileStage = new Scanner(new File("stageTrack.txt"));
+           // Loads stage
+           String scene = fileStage.nextLine();
+           heldStage = Integer.parseInt(scene);
+           // Close scanner
+           fileStage.close();
+       } catch ( IOException e ) {
+           System.out.println("No progress was saved");
+       }
     }
     
     public void mountCheck (Character c) {

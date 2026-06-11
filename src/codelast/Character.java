@@ -21,7 +21,7 @@ public class Character {
     private String name;
     private PApplet app;
     private PImage image;
-    private HeldItem item; // If character needs to carry an item
+    public HeldItem item; // If character needs to carry an item
     
     // Constructor
     public Character (PApplet p, int x, int y, int speed, String name, String imagePath) {
