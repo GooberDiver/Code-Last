@@ -12,6 +12,10 @@ package codelast;
 // Importing
 import processing.core.PApplet;
 import processing.core.PImage;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.File;
 
 public class Sketch extends PApplet {
     // Object declaration
@@ -30,6 +34,9 @@ public class Sketch extends PApplet {
     int stage = 0;
     static int heldStage = 0; // Variable used to keep track of previous stage
     boolean pickup = false;
+    
+    // load stage from file
+    
     
     // Setting screen
     public void settings() {
@@ -62,6 +69,7 @@ public class Sketch extends PApplet {
             text("My Cultural Story", 130, 50);
             text("Press enter to begin", 120, 100);
         } else if (stage == 1) {
+            // Draw objects
             door.draw();
             itemKey.draw();
             father.draw();
@@ -71,10 +79,16 @@ public class Sketch extends PApplet {
             bamboo.draw(); // Drawing Bamboo character
             // Changing the BG image for next scene
             bg = loadImage ("images/field.png"); 
-        } else if (stage == 2) {
+        } if (stage == 2) {
             background(50);
             bamboo.draw();
             turtle.draw();
+            // Door is put so user can return to stage 1 for now
+            door.x = 20;
+            door.y = 200;
+            door.draw();
+            // Save progress
+            progressSave();
         }
         if (stage == 10000) { // pause menu
            background(255);
@@ -159,7 +173,9 @@ public class Sketch extends PApplet {
                 pickup = false;
             } 
         }
-       
+        if (stage == 2 && bamboo.isCollidingWith(door)) {
+            stage = 1;
+        }
     } // end draw method
     
     // Method for different results when using keyboard
@@ -178,10 +194,10 @@ public class Sketch extends PApplet {
                 stage = 10000; // Stage is set high so pause menu won't trigger normally
             }  if (key == 'z') { // Ends pause
                 stage = heldStage;
-                }
+            }
         } // end of pause code
         
-        // Stage 1 mount check
+        // Check for mount and info
         if (stage != 0 && bamboo.isCollidingWith(turtle)) {
             // mount check
             if (key == 'c') {
@@ -191,8 +207,23 @@ public class Sketch extends PApplet {
             if (key == 'q') {
                 charInfoCheck(turtle);
             }
-        } // End of stage 1
+        } // End of check
     } // End of key pressed
+    
+    /**
+     * Method saves user's stage
+     */
+    public void progressSave() {
+        try {
+            // Making and using PrintWriter to save progress
+           PrintWriter w = new PrintWriter (new FileWriter("stageTrack.txt"));
+           w.print(stage);
+           w.close();
+        // Catch error
+        } catch ( IOException ioException ) {
+           System.out.println("Error with saving stage"); 
+        } 
+    }
     
     public void mountCheck (Character c) {
         if (c instanceof Human) {
