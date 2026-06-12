@@ -59,13 +59,7 @@ public class Sketch extends PApplet {
     
     // Drawing stages
     public void draw() {
-        // cutscene BG and text to tell user how to progress ctuscene
-        if (stage < 0) {
-            bg = loadImage("images/dawn.png"); // set BG img
-            textSize(15); // Shrink text size
-            text("Press enter to continue", 25, 350); // tell user how to progress
-        }
-        textSize(20); // reset text size to normal
+
         
         //Drawing BG
         image(bg, 0, 0, width, height);
@@ -83,11 +77,23 @@ public class Sketch extends PApplet {
             text("Long ago, there was a boy named Bamboo", 20, 300);
         }
         if (stage == -2) {
-            bamboo.x -= 25; // Moving bamboo left
+            bamboo.x = width/3; // Moving bamboo left
             bamboo.draw();
-            father.draw(); 
+            // Centers father character
+            father.x = width/2;
+            father.y = height/2;
+            father.draw(); //Draw father character
             text("Bamboo lived with his father who was strict", 20, 300);
         }
+        
+        // cutscene BG and text to tell user how to progress ctuscene
+        if (stage < 0) {
+            bg = loadImage("images/dawn.png"); // set BG img
+            textSize(15); // Shrink text size
+            text("Press enter to continue", 25, 350); // tell user how to progress
+        }
+        textSize(20); // reset text size to normal
+        
         // 1st game scene
         if (stage == 1) {
             // Drawing objects
