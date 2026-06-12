@@ -85,6 +85,24 @@ public class Sketch extends PApplet {
             father.draw(); //Draw father character
             text("Bamboo lived with his father who was strict", 20, 300);
         }
+        if (stage == -3) {
+            bamboo.draw();
+            father.draw();
+            // Text was split in 2 since it went offscreen
+            text("Bamboo's father forced him to handle", 20, 300);
+            text("housekeeping when visitors came", 20, 325);
+        }
+        if (stage == -4) {
+            bamboo.draw();
+            father.draw();
+            // Sets key's position
+            itemKey.x = 300;
+            itemKey.y = height/2;
+            // Draws key
+            itemKey.draw();
+            text("Bamboo's father required Bamboo to lock", 20, 300);
+            text("a chamber he was not allowed to see", 20, 325);
+        }
         
         // cutscene BG and text to tell user how to progress ctuscene
         if (stage < 0) {
@@ -96,6 +114,10 @@ public class Sketch extends PApplet {
         
         // 1st game scene
         if (stage == 1) {
+            // Reset positions of cutscene character
+            itemKey.x = itemKey.y = 25; 
+            father.x = father.y = 100;
+            bamboo.x = bamboo.y = width/2; // dimension is square so x and y are the same
             // Drawing objects
             door.draw();
             itemKey.draw();
@@ -247,9 +269,9 @@ public class Sketch extends PApplet {
             if (keyCode == TAB) { // Starts pause
                 heldStage = stage; // store the stage the user was on
                 stage = 10000; // Stage is set high so pause menu won't trigger normally
-            }  if (key == 'z') { // Ends pause
+            }  if (key == 'z' && stage == 10000) { // Ends pause
                 stage = heldStage; // sets the stage to the stored one
-            } if (key == 'm') { // resets user's progress to opening cutscene
+            } if (key == 'm' && stage == 10000) { // resets user's progress to opening cutscene
                 stage = -1;
             }
             
