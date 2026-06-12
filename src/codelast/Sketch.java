@@ -104,6 +104,12 @@ public class Sketch extends PApplet {
             text("Bamboo's father required Bamboo to lock", 20, 300);
             text("a chamber he was not allowed to see", 20, 325);
         }
+        if (stage == -5) {
+            bamboo.draw();
+            father.draw();
+            text("However, Bamboo's curiousity got the better", 20, 300);
+            text("of him one day and he entered the room", 20, 325);
+        }
         
         // cutscene BG and text to tell user how to progress ctuscene
         if (stage < 0) {
@@ -262,7 +268,7 @@ public class Sketch extends PApplet {
             if (keyCode == ENTER) {
                 // intro cutscenes count with negative values so stage is reduced
                 stage -=1; 
-                if (stage == -5) { // when final cutscene is reached, moves player to first scene
+                if (stage == -6) { // after seeing final intro scene, starts game
                     stage = 1;
                 }
             }
