@@ -59,6 +59,14 @@ public class Sketch extends PApplet {
     
     // Drawing stages
     public void draw() {
+        // cutscene BG and text to tell user how to progress ctuscene
+        if (stage < 0) {
+            bg = loadImage("images/dawn.png"); // set BG img
+            textSize(15); // Shrink text size
+            text("Press enter to continue", 25, 350); // tell user how to progress
+        }
+        textSize(20); // reset text size to normal
+        
         //Drawing BG
         image(bg, 0, 0, width, height);
         
@@ -69,9 +77,16 @@ public class Sketch extends PApplet {
             text("Press enter to begin", 120, 100);
         }
         // Opening cutscenes
+        // stage is set to negative so stopping player from moving only needs to be less or equal to 0
         if (stage == -1) {
             bamboo.draw();
             text("Long ago, there was a boy named Bamboo", 20, 300);
+        }
+        if (stage == -2) {
+            bamboo.x -= 25; // Moving bamboo left
+            bamboo.draw();
+            father.draw(); 
+            text("Bamboo lived with his father who was strict", 20, 300);
         }
         // 1st game scene
         if (stage == 1) {
@@ -99,7 +114,8 @@ public class Sketch extends PApplet {
             // Save progress
             progressSave();
         }
-        if (stage == 10000) { // pause menu
+        // pause menu
+        if (stage == 10000) { 
            background(255); //BG set to white
            text("Game is currently paused", 20, 50); //tell user the game is paused
            text("Press Z to unpause", 20, 100); // tell user how to unpause
@@ -108,8 +124,8 @@ public class Sketch extends PApplet {
         
         // Actions for keyboard input
         if (keyPressed) {
-            // Stop player from moving during start and pause
-            if (stage == 0 || stage == 10000) {
+            // Stop player from moving during cutscenes, start, and pause
+            if (stage <= 0 || stage == 10000) {
                 bamboo.speed = 0;
             } else { // Set speed to normal when not paused
                 bamboo.speed = 2;
@@ -208,6 +224,17 @@ public class Sketch extends PApplet {
                 stage = heldStage; // sets player's stage to the stored value
             }
         } // End of stage 0 if-statement
+        
+        // Used to transition through cutscenes at start
+        if (stage < 0) {
+            if (keyCode == ENTER) {
+                // intro cutscenes count with negative values so stage is reduced
+                stage -=1; 
+                if (stage == -5) { // when final cutscene is reached, moves player to first scene
+                    stage = 1;
+                }
+            }
+        } // end cutscene transition
         
         // Code for pause menu
         if (stage != 0) {
