@@ -67,8 +67,14 @@ public class Sketch extends PApplet {
             fill(0);
             text("My Cultural Story", 130, 50);
             text("Press enter to begin", 120, 100);
-            // 1st game scene
-        } if (stage == 1) {
+        }
+        // Opening cutscenes
+        if (stage == -1) {
+            bamboo.draw();
+            text("Long ago, there was a boy named Bamboo", 20, 300);
+        }
+        // 1st game scene
+        if (stage == 1) {
             // Drawing objects
             door.draw();
             itemKey.draw();
@@ -94,9 +100,10 @@ public class Sketch extends PApplet {
             progressSave();
         }
         if (stage == 10000) { // pause menu
-           background(255);
-           text("Game is currently paused", 20, 50);
-           text("Press Z to unpause", 20, 100);
+           background(255); //BG set to white
+           text("Game is currently paused", 20, 50); //tell user the game is paused
+           text("Press Z to unpause", 20, 100); // tell user how to unpause
+           text("Press M to return to opening cutscene", 20, 150); // tell user how to return to start cutscene
         }
         
         // Actions for keyboard input
@@ -209,7 +216,10 @@ public class Sketch extends PApplet {
                 stage = 10000; // Stage is set high so pause menu won't trigger normally
             }  if (key == 'z') { // Ends pause
                 stage = heldStage; // sets the stage to the stored one
+            } if (key == 'm') { // resets user's progress to opening cutscene
+                stage = -1;
             }
+            
         } // end of pause code
         
         // Check for mount and info with turtle
