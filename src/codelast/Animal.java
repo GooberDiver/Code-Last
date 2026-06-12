@@ -16,7 +16,15 @@ public class Animal extends Character {
     //Attribute
     private boolean flying; // Determines if animal is in flying state
     
-    // Constructor
+    /**
+     * Constructor for animal class
+     * @param p Set up objects to have visual
+     * @param x horizontal coordinate
+     * @param y vertical coordinate
+     * @param speed movement speed
+     * @param name name of animal
+     * @param imagePath image of object loads from imagePath
+     */
     public Animal(PApplet p, int x, int y, int speed, String name, String imagePath) {
         super(p, x, y, speed, name, imagePath); // Calls superclass
         flying = false; //Animal default state is not flying

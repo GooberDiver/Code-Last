@@ -21,7 +21,13 @@ public class HeldItem {
     private PApplet app;
     private PImage image;
     
-    // Constructor
+    /**
+     * Constructor for HeldItem
+     * @param p Sets up object to have visual
+     * @param x horizontal coordinate
+     * @param y vertical coordinate
+     * @param imagePath image is loaded from the imagePath in image file
+     */
     public HeldItem (PApplet p, int x, int y, String imagePath) {
         app = p;
         itemX = x;
