@@ -37,6 +37,8 @@ public class Sketch extends PApplet {
     static int heldStage = 0; // Variable used to keep track of previous stage
     boolean pickup = false; // determines if player is holding a key
     
+   
+    
     // Setting screen dimensions
     public void settings() {
         size(400, 400);
@@ -57,6 +59,13 @@ public class Sketch extends PApplet {
         itemKey = new Character(this, 25, 25, "images/DaveKey.png");
     }
     
+    /**
+     // cutscene objects
+    Character [][] cutsceneObjects = new Character[][];
+    cutsceneObjects[0][1] = {bamboo, father, itemKey};
+    cutsceneObjects[0][2] = [bamboo, turtle, dragon, phoenix];
+    */
+     
     // Drawing stages
     public void draw() {
 
@@ -112,7 +121,7 @@ public class Sketch extends PApplet {
         }
         
         // cutscene BG and text to tell user how to progress ctuscene
-        if (stage < 0) {
+        if (stage < 0 || stage > 500) {
             bg = loadImage("images/dawn.png"); // set BG img
             textSize(15); // Shrink text size
             text("Press enter to continue", 25, 350); // tell user how to progress
@@ -149,18 +158,38 @@ public class Sketch extends PApplet {
             // Save progress
             progressSave();
         }
+        
+        // Ending cutscenes
+        // stage number starts at 501 so cutscene won't normally trigger
+        if (stage == 501) {
+            // Set character positions
+            dragon.x = 25;
+            phoenix.x = 300;
+            turtle.x = 100;
+            bamboo.x = 200;
+            dragon.y = bamboo.y = phoenix.y = turtle.y = height/2;
+            // Draw characters
+            dragon.draw();
+            phoenix.draw();
+            turtle.draw();
+            bamboo.draw();   
+            // Text
+            text("Bamboo spent time with the dragon, turtle, ", 25, 300);
+            text("and phoenix and had a great time", 25, 325);
+        }
         // pause menu
         if (stage == 10000) { 
            background(255); //BG set to white
            text("Game is currently paused", 20, 50); //tell user the game is paused
            text("Press Z to unpause", 20, 100); // tell user how to unpause
            text("Press M to return to opening cutscene", 20, 150); // tell user how to return to start cutscene
+           text("Press P to head to ending cutscenes", 20, 200); // tells user how to go to end cutscene
         }
         
         // Actions for keyboard input
         if (keyPressed) {
             // Stop player from moving during cutscenes, start, and pause
-            if (stage <= 0 || stage == 10000) {
+            if (stage <= 0 || stage > 500) {
                 bamboo.speed = 0;
             } else { // Set speed to normal when not paused
                 bamboo.speed = 2;
@@ -283,8 +312,9 @@ public class Sketch extends PApplet {
                 stage = heldStage; // sets the stage to the stored one
             } if (key == 'm' && stage == 10000) { // resets user's progress to opening cutscene
                 stage = -1;
-            }
-            
+            } if (key == 'p' && stage == 10000) { // go to ending cutscenes
+                stage = 501;
+            } 
         } // end of pause code
         
         // Check for mount and info with turtle
