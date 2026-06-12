@@ -68,7 +68,8 @@ public class Sketch extends PApplet {
         if (stage == 0) {   
             fill(0);
             text("My Cultural Story", 130, 50);
-            text("Press enter to begin", 120, 100);
+            text("Press enter to begin from last save", 60, 100); // load progress
+            text("Press shift to start from beginning", 60, 150); // start new game
         }
         // Opening cutscenes
         // stage is set to negative so stopping player from moving only needs to be less or equal to 0
@@ -250,6 +251,9 @@ public class Sketch extends PApplet {
             if (keyCode == ENTER) { // User hits enter
                 progressLoad(); // loads the stage stored from file
                 stage = heldStage; // sets player's stage to the stored value
+            }
+            if (keyCode == SHIFT) { // User hits shift
+                stage = -1; // starts from beginning of game
             }
         } // End of stage 0 if-statement
         
