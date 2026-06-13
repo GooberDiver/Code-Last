@@ -39,12 +39,16 @@ public class Sketch extends PApplet {
     
    
     
-    // Setting screen dimensions
+    /**
+     * Screen dimensions are set
+     */
     public void settings() {
         size(400, 400);
     }
     
-    // Setting up objects and text
+    /**
+     * Objects are instantiated and text size is set
+     */
     public void setup () {
         bg = loadImage ("images/noon.png"); // Setting up BG image
         textSize(20); // sets size of text when displayed
@@ -59,14 +63,15 @@ public class Sketch extends PApplet {
         itemKey = new Character(this, 25, 25, "images/DaveKey.png");
     }
     
-    /**
+    
      // cutscene objects
-    Character [][] cutsceneObjects = new Character[][];
-    cutsceneObjects[0][1] = {bamboo, father, itemKey};
-    cutsceneObjects[0][2] = [bamboo, turtle, dragon, phoenix];
-    */
+    Character [][] cutsceneObjects = { {bamboo, father, itemKey},
+        {turtle, dragon, phoenix} };
+    
      
-    // Drawing stages
+    /**
+     * Stages are drawn
+     */
     public void draw() {
 
         
@@ -279,7 +284,9 @@ public class Sketch extends PApplet {
         }
     } // end draw method
     
-    // Method for different results when using keyboard
+    /**
+     * Method for different results when using keyboard
+     */
     public void keyPressed () {
         // Starting screen
         if (stage == 0) {
