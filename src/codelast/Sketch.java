@@ -135,10 +135,8 @@ public class Sketch extends PApplet {
         
         // 1st game scene
         if (stage == 1) {
-            // Reset positions of cutscene character
-            itemKey.x = itemKey.y = 25; 
-            father.x = father.y = 100;
-            bamboo.x = bamboo.y = width/2; // dimension is square so x and y are the same
+            
+
             // Drawing objects
             door.draw();
             itemKey.draw();
@@ -285,7 +283,7 @@ public class Sketch extends PApplet {
     } // end draw method
     
     /**
-     * Method for different results when using keyboard
+     * Method for different results when using 
      */
     public void keyPressed () {
         // Starting screen
@@ -306,6 +304,10 @@ public class Sketch extends PApplet {
                 stage -=1; 
                 if (stage == -6) { // after seeing final intro scene, starts game
                     stage = 1;
+                    // Reset positions of cutscene character
+                    itemKey.x = itemKey.y = 25; 
+                    father.x = father.y = 100;
+                    bamboo.x = bamboo.y = width/2; // move player to center
                 }
             }
         } // end cutscene transition
