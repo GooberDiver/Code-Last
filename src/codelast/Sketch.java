@@ -37,7 +37,8 @@ public class Sketch extends PApplet {
     static int heldStage = 0; // Variable used to keep track of previous stage
     boolean pickup = false; // determines if player is holding a key
     
-   
+    // Cutscene numbers array
+    int [][] cutsceneNumber = { {-1, -2, -3, -4, -5}, {501, 502, 503, 504, 505} };
     
     /**
      * Screen dimensions are set
@@ -63,12 +64,6 @@ public class Sketch extends PApplet {
         itemKey = new Character(this, 25, 25, "images/DaveKey.png");
     }
     
-    
-     // cutscene objects
-    Character [][] cutsceneObjects = { {bamboo, father, itemKey},
-        {turtle, dragon, phoenix} };
-    
-     
     /**
      * Stages are drawn
      */
@@ -83,7 +78,7 @@ public class Sketch extends PApplet {
             fill(0);
             text("My Cultural Story", 130, 50);
             text("Press enter to begin from last save", 60, 100); // load progress
-            text("Press shift to start from beginning", 60, 150); // start new game
+            text("Press shift to start from beginning", 60, 150); // start new game   
         }
         // Opening cutscenes
         // stage is set to negative so stopping player from moving only needs to be less or equal to 0
@@ -135,8 +130,6 @@ public class Sketch extends PApplet {
         
         // 1st game scene
         if (stage == 1) {
-            
-
             // Drawing objects
             door.draw();
             itemKey.draw();
@@ -302,7 +295,7 @@ public class Sketch extends PApplet {
             if (keyCode == ENTER) {
                 // intro cutscenes count with negative values so stage is reduced
                 stage -=1; 
-                if (stage == -6) { // after seeing final intro scene, starts game
+                if (stage < cutsceneNumber[0][4]) { // after seeing final intro scene, starts game
                     stage = 1;
                     // Reset positions of cutscene character
                     itemKey.x = itemKey.y = 25; 
