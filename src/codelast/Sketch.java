@@ -39,11 +39,10 @@ public class Sketch extends PApplet {
     int sceneCounter = 0;
     static int heldStage = 0; // Variable used to keep track of previous stage
     boolean pickup = false; // determines if player is holding a key
-    int travelDist = 6000; // Used in scene 2 for travel time
+    int travelDist = 4000; // Used in scene 2 for travel time
     // Clouds array
     int numClouds = 10;
     Character [] clouds = new Character[numClouds];
-    
     // Cutscene numbers array
     int [][] cutsceneNumber = { {-1, -2, -3, -4, -5}, {501, 502, 503, 504, 505, 506} };
     // Counters for number of start and end scenes
@@ -198,8 +197,6 @@ public class Sketch extends PApplet {
             // Set character positions
             dragon.x = 25;
             phoenix.x = 300;
-            turtle.x = 100;
-            bamboo.x = 200;
             dragon.y = bamboo.y = phoenix.y = turtle.y = height/2;
             // Draw characters
             dragon.draw();
@@ -282,7 +279,7 @@ public class Sketch extends PApplet {
             if (bamboo.mounted == true) { 
                 bamboo.speed = turtle.speed; // Changes movespeed while mounted
                 turtle.x = bamboo.x - 20; // Set new position of turtle
-                turtle.y = bamboo.y; // Turtle moves with bamboo while true
+                turtle.y = bamboo.y - 2; // Turtle moves with bamboo while true
             }
             // Character movement
             // WASD was used for movement since most games use WASD
@@ -322,6 +319,7 @@ public class Sketch extends PApplet {
                 text("Goal: Unlock the door", 15, 15);
             // tell user to ride turtle and leave the room
             } else {
+                fill (255);
                 text("Goal: Mount the turtle and leave", 15, 15);
                 text("(Press enter when touching turtle to mount", 15, 30);
             }
@@ -349,7 +347,7 @@ public class Sketch extends PApplet {
         } // End of stage 1 code
         
         // making clouds
-        if(travelDist % 400 == 0) {
+        if(travelDist % 200 == 0) {
                 for (int i = 0 ; i < numClouds ; i++) {
                     // Random is used so cloud position is randomized
                     int horizontal = (int)(Math.random() * 300);
@@ -372,6 +370,9 @@ public class Sketch extends PApplet {
             // portal collision
             if (travelDist == 0 && bamboo.isCollidingWith(portal)) {
                 stage = 3;
+                bamboo.mounted = false; // split up turtle and bamboo
+                turtle.x = 100;
+                bamboo.x = 200;
             }
             // Collision for clouds
             boolean collide = false;
@@ -391,7 +392,6 @@ public class Sketch extends PApplet {
         
         // Stage 3
         if (stage == 3) {
-            bamboo.mounted = false; // split up turtle and bamboo
             // Stage 3 collision checks
             if (bamboo.isCollidingWith(phoenix)) {
                 dialog = loadImage("images/dialog4.png"); // Set img
@@ -408,6 +408,7 @@ public class Sketch extends PApplet {
             // Move to ending scene
             if (bamboo.isCollidingWith(chair)) {
                 stage = 501;
+                bamboo.x = bamboo.y = width/2;
             }
             // Text for goal
             fill(255);
