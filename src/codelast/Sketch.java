@@ -92,7 +92,10 @@ public class Sketch extends PApplet {
         // Opening cutscenes
         // stage is set to negative so stopping player from moving only needs to be less or equal to 0
         if (stage == -1) {
+            // reposition and draw
+            bamboo.x = bamboo.y = width/2;
             bamboo.draw();
+            // text
             text("Long ago, there was a boy named Bamboo", 20, 300);
         }
         if (stage == -2) {
@@ -195,6 +198,8 @@ public class Sketch extends PApplet {
         // stage number starts at 501 so cutscene won't normally trigger
         if (stage == 501) {
             // Set character positions
+            bamboo.mounted = false;
+            turtle.x = 100;
             dragon.x = 25;
             phoenix.x = 300;
             dragon.y = bamboo.y = phoenix.y = turtle.y = height/2;
@@ -311,6 +316,7 @@ public class Sketch extends PApplet {
                 // Change stage if mounted and touching door after opening door
                 if (bamboo.mounted == true && bamboo.isCollidingWith(door)) {
                     stage = 2;
+                    travelDist = 4000; // Reset travel distance
                 }  
             }  
              // Tell user to pick up key
@@ -443,7 +449,12 @@ public class Sketch extends PApplet {
                     sceneCounter = 0; // reset value
                     // Reset positions
                     itemKey.x = itemKey.y = door.y = 25; 
+                    itemKey.item.itemUsed = false;
                     door.x = 160;
+                    door.image = loadImage("images/door1.png");
+                    bamboo.mounted = false;
+                    turtle.x = 300;
+                    turtle.y = 100;
                     bamboo.x = bamboo.y = width/2; // move player to center
                 }
             }
