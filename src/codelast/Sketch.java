@@ -64,16 +64,14 @@ public class Sketch extends PApplet {
         dragon = new Animal (this, 100, 200, 5, "Dragon", "images/dragon.png");
         phoenix = new Animal (this, 300, 250, 3, "Phoenix", "images/phoenix.png");
         // Objects use the alternate character constructor
-        door = new Character (this, width/2, 25, "images/door.png");
+        door = new Character (this, 160, 25, "images/door1.png");
         itemKey = new Character(this, 25, 25, "images/DaveKey.png");
     }
     
     /**
      * Stages are drawn
      */
-    public void draw() {
-
-        
+    public void draw() {    
         //Drawing BG
         image(bg, 0, 0, width, height);
         
@@ -136,17 +134,23 @@ public class Sketch extends PApplet {
         if (stage == 1) {
             // Drawing objects
             door.draw();
-            itemKey.draw();
-            father.draw();
+            // Key is removed once used
+            if (itemKey.item.itemUsed == false) {
+                itemKey.draw();
+            }
+                
+            
+            //father.draw();
             turtle.draw();
-            dragon.draw();
-            phoenix.draw();
+            //dragon.draw();
+            //phoenix.draw();
             bamboo.draw(); // Drawing Bamboo character
             // Changing the BG image for next scene
-            bg = loadImage ("images/field.png"); 
+            bg = loadImage ("images/brick.png"); 
+           
             // Save progress
             progressSave();
-            // 2nd game scene
+        // 2nd game scene
         } if (stage == 2) {
             background(50);
             bamboo.draw();
@@ -211,12 +215,14 @@ public class Sketch extends PApplet {
             text("his father for spending time dreaming", 25, 325);
         }
         if (stage == 505) {
+            // character
             bamboo.draw();
             // text
             text("Although it was a dream, Bamboo fondly", 25, 300);
             text("remembered the time he spent", 25, 325);
         }
         if (stage == 506) {
+            // text
             textSize(30);
             text("The end", 150, height/2);
         }
@@ -285,9 +291,43 @@ public class Sketch extends PApplet {
                     turtle.y = 100;
                 }
             } // End of turtle's collision code
-        
+            
         // stage 1 collision checks
-        if (stage == 1) {
+        if (stage == 1) {          
+            // Pick up key
+            if (bamboo.isCollidingWith(itemKey)){
+                pickup = true;
+            }
+            // Change door to open sprite when touched
+            if (itemKey.isCollidingWith(door)) {
+                door.image = loadImage("images/door2.png");
+                pickup = false;
+                itemKey.item.itemUsed = true; // Set item use to true
+                // Change stage if mounted and touching door after opening door
+                if (bamboo.mounted == true && bamboo.isCollidingWith(door)) {
+                    stage = 2;
+                }  
+            }  
+             // Tell user to pick up key
+            if (itemKey.item.itemUsed == false) {
+                fill(255);
+                text("Goal: Unlock the door", 15, 15);
+            } else {
+                text("Goal: Mount the turtle and leave", 15, 15);
+            }
+        } // End of stage 1 code
+        
+        /**
+        // Return to stage 1 and change door position
+        if (stage == 2 && bamboo.isCollidingWith(door)) {
+            stage = 1;
+            door.x = width/2;
+            door.y = 25;
+            itemKey.item.itemUsed = false;
+        }
+        */
+        
+         /**
             // Check if main character is colliding
             if (bamboo.isCollidingWith(dragon)) {
                 dialog = loadImage("images/dialog2.png"); // Set image
@@ -301,26 +341,8 @@ public class Sketch extends PApplet {
                 dialog = loadImage("images/dialog4.png"); // Set img
                 image(dialog, 40, 300); // Show dialogue   
             } 
-            // Pick up key
-            if (bamboo.isCollidingWith(itemKey)){
-                pickup = true;
-            }
-            // Change stages by touching door with key
-            if (itemKey.isCollidingWith(door)) {
-                stage = 2;
-                pickup = false;
-                itemKey.x = itemKey.y = 25;
-                itemKey.item.itemUsed = true; // Set item use to true
-            }  
-        } // End of stage 1 code
-        
-        // Return to stage 1 and change door position
-        if (stage == 2 && bamboo.isCollidingWith(door)) {
-            stage = 1;
-            door.x = width/2;
-            door.y = 25;
-            itemKey.item.itemUsed = false;
-        }
+            */
+         
     } // end draw method
     
     /**
@@ -347,9 +369,9 @@ public class Sketch extends PApplet {
                 if (sceneCounter >= startCount) { // after seeing final intro scene, starts game
                     stage = 1;
                     sceneCounter = 0; // reset value
-                    // Reset positions of cutscene character
-                    itemKey.x = itemKey.y = 25; 
-                    father.x = father.y = 100;
+                    // Reset positions
+                    itemKey.x = itemKey.y = door.y = 25; 
+                    door.x = 160;
                     bamboo.x = bamboo.y = width/2; // move player to center
                 }
             }

@@ -20,7 +20,7 @@ public class Character {
     public int speed;
     private String name;
     private PApplet app;
-    private PImage image;
+    public PImage image;
     public HeldItem item; // If character needs to carry an item
     
     /**
