@@ -30,6 +30,7 @@ public class Sketch extends PApplet {
     private Character door; // door isn't held but it is used for item checks
     private Character itemKey; // key
     private Character portal; // used for a collision check
+    private Character chair; // used for scene 3 collision check
     // PImage is for objects that won't interact with characters
     private PImage bg; // background
     private PImage dialog; // dialogue
@@ -66,12 +67,13 @@ public class Sketch extends PApplet {
         bamboo = new Human (this, width/2, height/2, 2, "Bamboo", "images/human.png");
         father = new Human (this, 100, 100, 1, "Father", "images/father.png");
         turtle = new Animal (this, 300, 100, 4, "Turtle", "images/turtle.png");
-        dragon = new Animal (this, 100, 200, 5, "Dragon", "images/dragon.png");
-        phoenix = new Animal (this, 300, 250, 3, "Phoenix", "images/phoenix.png");
+        dragon = new Animal (this, 100, 100, 5, "Dragon", "images/dragon.png");
+        phoenix = new Animal (this, 250, 100, 3, "Phoenix", "images/phoenix.png");
         // Objects use the alternate character constructor
         door = new Character (this, 160, 25, "images/door1.png");
         itemKey = new Character(this, 25, 25, "images/DaveKey.png");
         portal = new Character(this, 350, height/2, "images/portal.png");
+        chair = new Character(this, 350, 160, "images/chair.png");
     }
     
     /**
@@ -148,7 +150,6 @@ public class Sketch extends PApplet {
             bamboo.draw(); // Drawing Bamboo character
             // Changing the BG image for next scene
             bg = loadImage ("images/brick.png"); 
-           
             // Save progress
             progressSave();
         // 2nd game scene
@@ -176,17 +177,21 @@ public class Sketch extends PApplet {
             bg = loadImage("images/field.png");
             // Reposition
             turtle.x = 100;
-            turtle.y = 300;
+            turtle.y = 200;
             // Characters
             dragon.draw();
             phoenix.draw();
             turtle.draw();
             bamboo.draw();
+            // Table and chair
+            fill(85);
+            rect(50, 150, 300, 50);
+            chair.draw();
             // Save progress
-            progressSave();
-            
+            progressSave();    
         }
         
+        fill(0); // set text to black
         // Ending cutscenes
         // stage number starts at 501 so cutscene won't normally trigger
         if (stage == 501) {
@@ -318,6 +323,7 @@ public class Sketch extends PApplet {
             // tell user to ride turtle and leave the room
             } else {
                 text("Goal: Mount the turtle and leave", 15, 15);
+                text("(Press enter when touching turtle to mount", 15, 30);
             }
             
             // Turtle collision check
@@ -395,21 +401,19 @@ public class Sketch extends PApplet {
                 dialog = loadImage("images/dialog2.png"); // Set image
                 image(dialog, 40, 300); // Show dialogue
             }       
+            if (bamboo.isCollidingWith(turtle)) {
+               dialog = loadImage("images/dialog5.PNG"); // set img
+               image(dialog, 40, 300); // show dialogue
+            }
+            // Move to ending scene
+            if (bamboo.isCollidingWith(chair)) {
+                stage = 501;
+            }
             // Text for goal
             fill(255);
             text("Goal: Sit at the table", 15, 15);
             text("Optional: Speak with the other guests", 15, 30);
-        }
-         /**
-            // Check if main character is colliding
-            
-            if (bamboo.isCollidingWith(father)) {
-                dialog = loadImage("images/dialog3.png"); // Set img
-                image(dialog, 40, 300); // Show dialogue
-            }
-
-            */
-         
+        }       
     } // end draw method
     
     /**
