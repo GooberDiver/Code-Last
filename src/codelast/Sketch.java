@@ -39,7 +39,7 @@ public class Sketch extends PApplet {
     boolean pickup = false; // determines if player is holding a key
     
     // Cutscene numbers array
-    int [][] cutsceneNumber = { {-1, -2, -3, -4, -5}, {501, 502, 503, 504, 505} };
+    int [][] cutsceneNumber = { {-1, -2, -3, -4, -5}, {501, 502, 503, 504, 505, 506} };
     // Counters for number of start and end scenes
     int startCount = cutsceneNumber[0].length;
     int endCount = cutsceneNumber[1].length;
@@ -125,7 +125,7 @@ public class Sketch extends PApplet {
         }
         
         // cutscene BG and text to tell user how to progress ctuscene
-        if (stage < 0 || stage > 500) {
+        if (stage < 0 || (stage > 500 && stage != 506)) {
             bg = loadImage("images/dawn.png"); // set BG img
             textSize(15); // Shrink text size
             text("Press enter to continue", 25, 350); // tell user how to progress
@@ -190,14 +190,35 @@ public class Sketch extends PApplet {
         }
         if (stage == 503) {
             // Change position
-            turtle.x = 50;
-            bamboo.y = 300;
+            turtle.x = 250;
+            bamboo.y = 250;
             // Draw characters
             bamboo.draw();
             turtle.draw();
             // Text
             text("However, Bamboo fell off the turtle on the", 25, 300);
             text("way back home", 25, 325);
+        }
+        if (stage == 504) {
+            // reposition
+            bamboo.x = 100;
+            bamboo.y = father.x = father.y = width/2;
+            // characters
+            bamboo.draw();
+            father.draw();
+            // text
+            text("When Bamboo woke up, he was scolded by", 25, 300);
+            text("his father for spending time dreaming", 25, 325);
+        }
+        if (stage == 505) {
+            bamboo.draw();
+            // text
+            text("Although it was a dream, Bamboo fondly", 25, 300);
+            text("remembered the time he spent", 25, 325);
+        }
+        if (stage == 506) {
+            textSize(30);
+            text("The end", 150, height/2);
         }
         
         // pause menu
@@ -336,10 +357,8 @@ public class Sketch extends PApplet {
         
         // End cutscenes
         if (stage > 500) {
-            //for (int i = 0 ; i <= endCount ; i++) {
                 if (keyCode == ENTER) {
                     stage += 1;
-                //}
             }
         } // end cutscene code ends
         
