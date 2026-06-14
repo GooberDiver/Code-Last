@@ -309,7 +309,7 @@ public class Sketch extends PApplet {
                     bamboo.x = bamboo.y = width/2; // move player to center
                 }
             }
-        } // end cutscene transition
+        } // start cutscene transition code ends
         
         // End cutscenes
         if (stage > 500) {
@@ -319,7 +319,8 @@ public class Sketch extends PApplet {
                     sceneCounter += 1;
                 }
             }
-        }
+        } // end cutscene code ends
+        
         // Code for pause menu
         if (stage != 0) {
             if (keyCode == TAB) { // Starts pause
