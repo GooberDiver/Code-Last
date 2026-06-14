@@ -43,7 +43,7 @@ public class Sketch extends PApplet {
     // Counters for number of start and end scenes
     int startCount = cutsceneNumber[0].length;
     int endCount = cutsceneNumber[1].length;
-    
+
     /**
      * Screen dimensions are set
      */
@@ -123,7 +123,7 @@ public class Sketch extends PApplet {
         }
         
         // cutscene BG and text to tell user how to progress ctuscene
-        if (stage < 0 || (stage > 500 && stage != 506)) {
+        if (stage < 0 || (stage > 500 && stage < cutsceneNumber[1][endCount - 1])) {
             bg = loadImage("images/dawn.png"); // set BG img
             textSize(15); // Shrink text size
             text("Press enter to continue", 25, 350); // tell user how to progress
@@ -138,8 +138,6 @@ public class Sketch extends PApplet {
             if (itemKey.item.itemUsed == false) {
                 itemKey.draw();
             }
-                
-            
             //father.draw();
             turtle.draw();
             //dragon.draw();
@@ -377,8 +375,8 @@ public class Sketch extends PApplet {
             }
         } // start cutscene transition code ends
         
-        // End cutscenes
-        if (stage > 500) {
+        // End cutscenes, check if user has reached final stage and stop if they have
+        if (stage > 500 && stage < cutsceneNumber[1][endCount - 1]) {
                 if (keyCode == ENTER) {
                     stage += 1;
             }
