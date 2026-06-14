@@ -34,11 +34,15 @@ public class Sketch extends PApplet {
     private PImage dialog; // dialogue
     // Variable for game function
     int stage = 0; // tracks current stage
+    int sceneCounter = 0;
     static int heldStage = 0; // Variable used to keep track of previous stage
     boolean pickup = false; // determines if player is holding a key
     
     // Cutscene numbers array
     int [][] cutsceneNumber = { {-1, -2, -3, -4, -5}, {501, 502, 503, 504, 505} };
+    // Counters for number of start and end scenes
+    int startCount = cutsceneNumber[0].length;
+    int endCount = cutsceneNumber[1].length;
     
     /**
      * Screen dimensions are set
@@ -295,8 +299,10 @@ public class Sketch extends PApplet {
             if (keyCode == ENTER) {
                 // intro cutscenes count with negative values so stage is reduced
                 stage -=1; 
-                if (stage < cutsceneNumber[0][4]) { // after seeing final intro scene, starts game
+                sceneCounter += 1;
+                if (sceneCounter >= startCount) { // after seeing final intro scene, starts game
                     stage = 1;
+                    sceneCounter = 0; // reset value
                     // Reset positions of cutscene character
                     itemKey.x = itemKey.y = 25; 
                     father.x = father.y = 100;
@@ -305,6 +311,15 @@ public class Sketch extends PApplet {
             }
         } // end cutscene transition
         
+        // End cutscenes
+        if (stage > 500) {
+            if (keyCode == ENTER) {
+                for (int i = 0 ; i > endCount ; i++) {
+                    stage += 1;
+                    sceneCounter += 1;
+                }
+            }
+        }
         // Code for pause menu
         if (stage != 0) {
             if (keyCode == TAB) { // Starts pause
