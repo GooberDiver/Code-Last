@@ -37,6 +37,10 @@ public class Sketch extends PApplet {
     int sceneCounter = 0;
     static int heldStage = 0; // Variable used to keep track of previous stage
     boolean pickup = false; // determines if player is holding a key
+    int travelDist = 10000; // Used in scene 2 for travel time
+    // Clouds array
+    int numClouds = 10;
+    Character [] clouds = new Character[numClouds];
     
     // Cutscene numbers array
     int [][] cutsceneNumber = { {-1, -2, -3, -4, -5}, {501, 502, 503, 504, 505, 506} };
@@ -147,10 +151,15 @@ public class Sketch extends PApplet {
             progressSave();
         // 2nd game scene
         } if (stage == 2) {
+            bamboo.mounted = true; // keep player mounted
             bg = loadImage("images/noon.png"); // change BG
             // Characters
             bamboo.draw();
             turtle.draw();
+            // Clouds
+            for (int i = 0 ; i < clouds.length ; i++) {
+                clouds[i].draw();
+            }
             // Save progress
             progressSave();
         // 3rd game scene
@@ -321,17 +330,36 @@ public class Sketch extends PApplet {
             } // End of turtle's collision code
         } // End of stage 1 code
         
-        /**
-        // Return to stage 1 and change door position
-        if (stage == 2 && bamboo.isCollidingWith(door)) {
-            stage = 1;
-            door.x = width/2;
-            door.y = 25;
-            itemKey.item.itemUsed = false;
-        }
-        */
+        // making clouds
+        if(travelDist % 250 == 0) {
+                for (int i = 0 ; i < numClouds ; i++) {
+                    // Random is used so cloud position is randomized
+                    int horizontal = (int)(Math.random() * 300);
+                    int vertical = (int)(Math.random() * 250);
+                    clouds[i] = new Character(this, horizontal, vertical, "images/cloud.png");
+                }
+            }
+        // Stage 2
+        if (stage == 2) {
+            // Decrease distance
+            if (travelDist > 0) {
+                travelDist -= bamboo.speed;
+            } else {
+                travelDist = 0;
+            }
+            // Text
+            fill(255);
+            text("Goal: Reach the beginning of the world", 15, 15);
+            text("Distance left: " + travelDist, 15, 30);
+            // Collision for clouds
+            for (int i = 0 ; i < numClouds ; i++) {
+                   if (bamboo.isCollidingWith(clouds[i]) || turtle.isCollidingWith(clouds[i])) {
+                       bamboo.speed = 1; // Player slows down if they collide
+                   }
+            } 
+        } // End stage 2
         
-
+        // Stage 3
         if (stage == 3) {
             bamboo.mounted = false; // split up turtle and bamboo
             // Stage 3 collision checks
