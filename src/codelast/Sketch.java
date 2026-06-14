@@ -29,6 +29,7 @@ public class Sketch extends PApplet {
     // Objects set as character but will use the HeldItem constructor version
     private Character door; // door isn't held but it is used for item checks
     private Character itemKey; // key
+    private Character portal; // used for a collision check
     // PImage is for objects that won't interact with characters
     private PImage bg; // background
     private PImage dialog; // dialogue
@@ -37,7 +38,7 @@ public class Sketch extends PApplet {
     int sceneCounter = 0;
     static int heldStage = 0; // Variable used to keep track of previous stage
     boolean pickup = false; // determines if player is holding a key
-    int travelDist = 10000; // Used in scene 2 for travel time
+    int travelDist = 6000; // Used in scene 2 for travel time
     // Clouds array
     int numClouds = 10;
     Character [] clouds = new Character[numClouds];
@@ -70,6 +71,7 @@ public class Sketch extends PApplet {
         // Objects use the alternate character constructor
         door = new Character (this, 160, 25, "images/door1.png");
         itemKey = new Character(this, 25, 25, "images/DaveKey.png");
+        portal = new Character(this, 350, height/2, "images/portal.png");
     }
     
     /**
@@ -162,12 +164,19 @@ public class Sketch extends PApplet {
                     clouds[i].draw();
                 }
             }
+            // portal
+            if (travelDist == 0) {
+                portal.draw();
+            }
             // Save progress
             progressSave();
         // 3rd game scene
         } if (stage == 3) {
             // Change bg image
             bg = loadImage("images/field.png");
+            // Reposition
+            turtle.x = 100;
+            turtle.y = 300;
             // Characters
             dragon.draw();
             phoenix.draw();
@@ -306,11 +315,12 @@ public class Sketch extends PApplet {
             if (itemKey.item.itemUsed == false) {
                 fill(255);
                 text("Goal: Unlock the door", 15, 15);
+            // tell user to ride turtle and leave the room
             } else {
                 text("Goal: Mount the turtle and leave", 15, 15);
             }
             
-                    // Turtle collision check
+            // Turtle collision check
             if (bamboo.isCollidingWith(turtle) ) {
                 // Setting dialogue img with check to see if character is mounted
                 if (bamboo.mounted == true) {
@@ -336,7 +346,7 @@ public class Sketch extends PApplet {
         if(travelDist % 400 == 0) {
                 for (int i = 0 ; i < numClouds ; i++) {
                     // Random is used so cloud position is randomized
-                    int horizontal = (int)(Math.random() * 300); // 100 added to start to the right
+                    int horizontal = (int)(Math.random() * 300);
                     int vertical = (int)(Math.random() * 250) + 25; //25 is added to avoid covering text
                     clouds[i] = new Character(this, horizontal, vertical, "images/cloud.png");
                 }
@@ -347,18 +357,22 @@ public class Sketch extends PApplet {
             if (travelDist > 0) {
                 travelDist -= bamboo.speed;
             } else {
-                travelDist = 0;
+                travelDist = 0; //keep at 0 if distance is 0
             }
             // Text
             fill(255);
             text("Goal: Reach the beginning of the world", 15, 15);
             text("Distance left: " + travelDist, 15, 30);
+            // portal collision
+            if (travelDist == 0 && bamboo.isCollidingWith(portal)) {
+                stage = 3;
+            }
             // Collision for clouds
             boolean collide = false;
             for (int i = 0 ; i < numClouds ; i++) {
                    if (bamboo.isCollidingWith(clouds[i])) {
                        collide = true;
-                       break; // exit loop if collision
+                       break; // exit loop if collision occurs
                     }
             }
             // Speed change depending on collision
@@ -381,6 +395,10 @@ public class Sketch extends PApplet {
                 dialog = loadImage("images/dialog2.png"); // Set image
                 image(dialog, 40, 300); // Show dialogue
             }       
+            // Text for goal
+            fill(255);
+            text("Goal: Sit at the table", 15, 15);
+            text("Optional: Speak with the other guests", 15, 30);
         }
          /**
             // Check if main character is colliding
