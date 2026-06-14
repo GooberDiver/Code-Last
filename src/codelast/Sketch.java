@@ -177,6 +177,12 @@ public class Sketch extends PApplet {
             text("Bamboo spent time with the dragon, turtle, ", 25, 300);
             text("and phoenix and had a great time", 25, 325);
         }
+        if (stage == 502) {
+            bamboo.draw();
+            turtle.draw();
+            // Text
+            text("Eventually, Bamboo and turtle had to return", 25, 300);
+        }
         // pause menu
         if (stage == 10000) { 
            background(255); //BG set to white
@@ -313,11 +319,10 @@ public class Sketch extends PApplet {
         
         // End cutscenes
         if (stage > 500) {
-            if (keyCode == ENTER) {
-                for (int i = 0 ; i > endCount ; i++) {
+            //for (int i = 0 ; i <= endCount ; i++) {
+                if (keyCode == ENTER) {
                     stage += 1;
-                    sceneCounter += 1;
-                }
+                //}
             }
         } // end cutscene code ends
         
