@@ -157,8 +157,10 @@ public class Sketch extends PApplet {
             bamboo.draw();
             turtle.draw();
             // Clouds
-            for (int i = 0 ; i < clouds.length ; i++) {
-                clouds[i].draw();
+            if (travelDist > 0) {
+                for (int i = 0 ; i < clouds.length ; i++) {
+                    clouds[i].draw();
+                }
             }
             // Save progress
             progressSave();
@@ -331,11 +333,11 @@ public class Sketch extends PApplet {
         } // End of stage 1 code
         
         // making clouds
-        if(travelDist % 250 == 0) {
+        if(travelDist % 400 == 0) {
                 for (int i = 0 ; i < numClouds ; i++) {
                     // Random is used so cloud position is randomized
-                    int horizontal = (int)(Math.random() * 300);
-                    int vertical = (int)(Math.random() * 250);
+                    int horizontal = (int)(Math.random() * 300); // 100 added to start to the right
+                    int vertical = (int)(Math.random() * 250) + 25; //25 is added to avoid covering text
                     clouds[i] = new Character(this, horizontal, vertical, "images/cloud.png");
                 }
             }
@@ -352,11 +354,19 @@ public class Sketch extends PApplet {
             text("Goal: Reach the beginning of the world", 15, 15);
             text("Distance left: " + travelDist, 15, 30);
             // Collision for clouds
+            boolean collide = false;
             for (int i = 0 ; i < numClouds ; i++) {
-                   if (bamboo.isCollidingWith(clouds[i]) || turtle.isCollidingWith(clouds[i])) {
-                       bamboo.speed = 1; // Player slows down if they collide
-                   }
-            } 
+                   if (bamboo.isCollidingWith(clouds[i])) {
+                       collide = true;
+                       break; // exit loop if collision
+                    }
+            }
+            // Speed change depending on collision
+            if (collide = true) {
+                bamboo.speed = 2;
+            } else {
+                bamboo.speed = 4;
+            }
         } // End stage 2
         
         // Stage 3
