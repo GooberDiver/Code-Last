@@ -447,7 +447,7 @@ public class Sketch extends PApplet {
                     bamboo.x = bamboo.y = width/2; // move player to center
                 }
             }
-        } // start cutscene transition code ends
+        } // starting cutscene transition code ends
         
         // End cutscenes, check if user has reached final stage and stop if they have
         if (stage > 500 && stage < cutsceneNumber[1][endCount - 1]) {
@@ -510,6 +510,7 @@ public class Sketch extends PApplet {
            heldStage = Integer.parseInt(scene);
            // Close scanner
            fileStage.close();
+           // Error check
        } catch ( IOException e ) {
            System.out.println("No progress was saved");
        }
