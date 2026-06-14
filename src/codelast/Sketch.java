@@ -178,11 +178,28 @@ public class Sketch extends PApplet {
             text("and phoenix and had a great time", 25, 325);
         }
         if (stage == 502) {
+            // Reposition
+            bamboo.y = 25;
+            turtle.x = bamboo.x - 15;
+            turtle.y = 25;
+            // characters
             bamboo.draw();
             turtle.draw();
             // Text
             text("Eventually, Bamboo and turtle had to return", 25, 300);
         }
+        if (stage == 503) {
+            // Change position
+            turtle.x = 50;
+            bamboo.y = 300;
+            // Draw characters
+            bamboo.draw();
+            turtle.draw();
+            // Text
+            text("However, Bamboo fell off the turtle on the", 25, 300);
+            text("way back home", 25, 325);
+        }
+        
         // pause menu
         if (stage == 10000) { 
            background(255); //BG set to white
@@ -228,7 +245,7 @@ public class Sketch extends PApplet {
         }
         
         // Turtle collision check
-        if (bamboo.isCollidingWith(turtle)) {
+        if (bamboo.isCollidingWith(turtle) && stage < 500) {
                 // Setting dialogue img with check to see if character is mounted
                 if (bamboo.mounted == true) {
                     dialog = loadImage("images/mountText.png");
