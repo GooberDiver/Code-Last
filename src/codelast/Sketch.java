@@ -138,10 +138,7 @@ public class Sketch extends PApplet {
             if (itemKey.item.itemUsed == false) {
                 itemKey.draw();
             }
-            //father.draw();
             turtle.draw();
-            //dragon.draw();
-            //phoenix.draw();
             bamboo.draw(); // Drawing Bamboo character
             // Changing the BG image for next scene
             bg = loadImage ("images/brick.png"); 
@@ -150,15 +147,24 @@ public class Sketch extends PApplet {
             progressSave();
         // 2nd game scene
         } if (stage == 2) {
-            background(50);
+            bg = loadImage("images/noon.png"); // change BG
+            // Characters
             bamboo.draw();
             turtle.draw();
-            // Door is put so user can return to stage 1 for now
-            door.x = 20;
-            door.y = 200;
-            door.draw();
             // Save progress
             progressSave();
+        // 3rd game scene
+        } if (stage == 3) {
+            // Change bg image
+            bg = loadImage("images/field.png");
+            // Characters
+            dragon.draw();
+            phoenix.draw();
+            turtle.draw();
+            bamboo.draw();
+            // Save progress
+            progressSave();
+            
         }
         
         // Ending cutscenes
@@ -268,27 +274,6 @@ public class Sketch extends PApplet {
                 bamboo.move(1,0);
             }    
         }
-        
-        // Turtle collision check
-        if (bamboo.isCollidingWith(turtle) && stage < 500) {
-                // Setting dialogue img with check to see if character is mounted
-                if (bamboo.mounted == true) {
-                    dialog = loadImage("images/mountText.png");
-                } else { // set to normal dialogue when unmounted
-                    dialog = loadImage("images/dialog1.PNG"); 
-                }
-                image(dialog, 40, 300); // Showing dialogue
-
-                // Code for mounting
-                if (keyCode == ENTER) {
-                    bamboo.mounted = true;
-                }
-                if (keyCode == BACKSPACE) { // unmounting
-                    bamboo.mounted = false;
-                    turtle.x = 300;
-                    turtle.y = 100;
-                }
-            } // End of turtle's collision code
             
         // stage 1 collision checks
         if (stage == 1) {          
@@ -313,6 +298,27 @@ public class Sketch extends PApplet {
             } else {
                 text("Goal: Mount the turtle and leave", 15, 15);
             }
+            
+                    // Turtle collision check
+            if (bamboo.isCollidingWith(turtle) ) {
+                // Setting dialogue img with check to see if character is mounted
+                if (bamboo.mounted == true) {
+                    dialog = loadImage("images/mountText.png");
+                } else { // set to normal dialogue when unmounted
+                    dialog = loadImage("images/dialog1.PNG"); 
+                }
+                image(dialog, 40, 300); // Showing dialogue
+
+                // Code for mounting
+                if (keyCode == ENTER) {
+                    bamboo.mounted = true;
+                }
+                if (keyCode == BACKSPACE) { // unmounting
+                    bamboo.mounted = false;
+                    turtle.x = 300;
+                    turtle.y = 100;
+                }
+            } // End of turtle's collision code
         } // End of stage 1 code
         
         /**
@@ -325,20 +331,27 @@ public class Sketch extends PApplet {
         }
         */
         
-         /**
-            // Check if main character is colliding
+
+        if (stage == 3) {
+            bamboo.mounted = false; // split up turtle and bamboo
+            // Stage 3 collision checks
+            if (bamboo.isCollidingWith(phoenix)) {
+                dialog = loadImage("images/dialog4.png"); // Set img
+                image(dialog, 40, 300); // Show dialogue   
+            }  
             if (bamboo.isCollidingWith(dragon)) {
                 dialog = loadImage("images/dialog2.png"); // Set image
                 image(dialog, 40, 300); // Show dialogue
             }       
+        }
+         /**
+            // Check if main character is colliding
+            
             if (bamboo.isCollidingWith(father)) {
                 dialog = loadImage("images/dialog3.png"); // Set img
                 image(dialog, 40, 300); // Show dialogue
             }
-            if (bamboo.isCollidingWith(phoenix)) {
-                dialog = loadImage("images/dialog4.png"); // Set img
-                image(dialog, 40, 300); // Show dialogue   
-            } 
+
             */
          
     } // end draw method
